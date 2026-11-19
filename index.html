@@ -274,22 +274,23 @@ main.money{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);
 .m2-n{font-family:var(--f-disp);font-weight:600;font-size:13px}
 .m2-s{font-family:var(--f-mono);font-size:7.5px;fill:#8A93A0}
 .m2-b{font-family:var(--f-mono);font-size:8px;fill:#10151F}
-.m2-core{fill:#0B2545}
+.m2-core{fill:var(--bk-d,#0B2545);transition:fill .6s}
 .m2-cn{font-family:var(--f-disp);font-weight:600;font-size:15px;fill:#FFFFFF}
 .m2-cb{font-family:var(--f-mono);font-size:8.5px;fill:#DCE4F5}
 .m2-tick{stroke:#C9CED6;stroke-width:.6}
 .m2-mtn{transform-box:view-box;transform-origin:50% 85.7%;animation:m2mtn 2s ease-in-out infinite}
 @keyframes m2mtn{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.025)}}
-.m2-i1{fill:#C9D6FA}.m2-i0{fill:#7E9BF0}.m2-f1{fill:#F1DBA9}.m2-f0{fill:#C98E1F}
-.m2-il{fill:none;stroke:#1F4FD8;stroke-width:1}.m2-fl{fill:none;stroke:#A86A00;stroke-width:1}
-.m2-tag{font-family:var(--f-mono);font-size:11px;font-weight:600}.m2-tag.blue{fill:#1F4FD8}.m2-tag.amber{fill:#A86A00}
+.m2-i1{fill:var(--bk-sl,#C9D6FA)}.m2-i0{fill:var(--bk-s,#7E9BF0);opacity:.75}.m2-f1{fill:var(--bk-pl,#F1DBA9)}.m2-f0{fill:var(--bk-p,#C98E1F)}
+.m2-i1,.m2-i0,.m2-f1,.m2-f0,.m2-il,.m2-fl,.m2-big,.m2-dot{transition:fill .6s,stroke .6s}
+.m2-il{fill:none;stroke:var(--bk-s,#1F4FD8);stroke-width:1}.m2-fl{fill:none;stroke:var(--bk-p,#A86A00);stroke-width:1}
+.m2-tag{font-family:var(--f-mono);font-size:11px;font-weight:600}.m2-tag.blue{fill:var(--bk-s,#1F4FD8)}.m2-tag.amber{fill:var(--bk-p,#A86A00)}
 .m2-close{fill:#10151F}
 .m2-cur{stroke:#10151F;stroke-width:1;transition:all .6s ease}
-.m2-dot{fill:#A86A00;transition:all .6s ease;transform-box:fill-box;transform-origin:center;animation:tvpulse 1.2s ease-in-out infinite}
-.m2-k{font-family:var(--f-mono);font-size:12px;fill:#5B6472}.m2-k.b{fill:#0B2545;font-weight:600}
-.m2-big{font-family:var(--f-disp);font-weight:700;font-size:54px;fill:#A86A00;animation:m2big 2s ease-in-out infinite}
+.m2-dot{fill:var(--bk-p,#A86A00);transition:all .6s ease;transform-box:fill-box;transform-origin:center;animation:tvpulse 1.2s ease-in-out infinite}
+.m2-k{font-family:var(--f-mono);font-size:12px;fill:#5B6472}.m2-k.b{fill:var(--bk-d,#0B2545);font-weight:600}
+.m2-big{font-family:var(--f-disp);font-weight:700;font-size:54px;fill:var(--bk-p,#A86A00);animation:m2big 2s ease-in-out infinite}
 @keyframes m2big{0%{opacity:.25}18%,100%{opacity:1}}
-.m2-m{font-family:var(--f-mono);font-size:13px;fill:#10151F}.m2-m.blue{fill:#1F4FD8}
+.m2-m{font-family:var(--f-mono);font-size:13px;fill:#10151F}.m2-m.blue{fill:var(--bk-s,#1F4FD8)}
 .m2-off{fill:#11834F}.m2-offt{font-family:var(--f-mono);font-size:11.5px;font-weight:600;fill:#FFFFFF}
 @media (prefers-reduced-motion:reduce){.m2-orbit,.m2-ray,.m2-pl,.m2-mtn,.m2-dot,.m2-big{animation:none}}
 main.money2{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:.4rem}
@@ -764,8 +765,14 @@ mark();draw();})();
 var C=[[741.5, "Mar 2027", "\u20ac0.3\u201315m", "\u20ac10\u2013100m"], [795.3, "Sep 2027", "\u20ac30\u2013150m", "\u20ac1b"], [859.7, "Apr 2028", "\u20ac90\u2013750m", "\u20ac3\u20135b"], [929.6, "Dec 2028", "\u20ac0.3\u20133b", "\u20ac10\u201320b"], [988.8, "Jul 2029", "\u20ac0.3\u20137.5b", "\u20ac10\u201350b"], [1144.6, "Dec 2030", "\u20ac0.3\u201315b", "\u20ac10\u2013100b"]],k=0,cur=document.getElementById('m2Cur'),dot=document.getElementById('m2Dot'),mon=document.getElementById('m2Mon'),inv=document.getElementById('m2Inv');
 function step(){var c=C[k];cur.setAttribute('x1',c[0]);cur.setAttribute('x2',c[0]);dot.setAttribute('cx',c[0]);big.textContent=c[2];mon.textContent=c[1];inv.textContent='i '+c[3];k=(k+1)%C.length}
 step();if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(step,2000);
-var row=document.querySelector('#m2Ctl .cd-row'),N=['Goldman Sachs','JPMorgan','Morgan Stanley','Citi','Bank of America'],B=[];
-N.forEach(function(n,i){var b=document.createElement('button');b.type='button';b.textContent=n;b.addEventListener('click',function(){document.getElementById('m2Bank').textContent=n;document.getElementById('m2Bank2').textContent=n;B.forEach(function(x,j){x.setAttribute('aria-pressed',j===i?'true':'false')})});b.setAttribute('aria-pressed',i?'false':'true');row.appendChild(b);B.push(b)});})();
+var row=document.querySelector('#m2Ctl .cd-row'),fig=big.ownerSVGElement,B=[],N=[
+['Goldman Sachs',{d:'#22344F',p:'#6B96C3',pl:'#CFDDED',s:'#22344F',sl:'#DDE3EC'}],
+['JPMorgan',{d:'#3B2A20',p:'#9C7A4B',pl:'#EADFCB',s:'#3B2A20',sl:'#E2DBD5'}],
+['Morgan Stanley',{d:'#002B51',p:'#187ABA',pl:'#CDE3F2',s:'#002B51',sl:'#D5DEE8'}],
+['Citi',{d:'#003B70',p:'#EE1C25',pl:'#F9C9CB',s:'#056DAE',sl:'#CFE3F2'}],
+['Bank of America',{d:'#012169',p:'#E31837',pl:'#F7C6CE',s:'#012169',sl:'#D3D9E8'}]];
+function pick(i){var n=N[i][0],c=N[i][1];document.getElementById('m2Bank').textContent=n;document.getElementById('m2Bank2').textContent=n;for(var k in c)fig.style.setProperty('--bk-'+k,c[k]);B.forEach(function(x,j){x.setAttribute('aria-pressed',j===i?'true':'false')})}
+N.forEach(function(n,i){var b=document.createElement('button');b.type='button';b.textContent=n[0];b.addEventListener('click',function(){pick(i)});row.appendChild(b);B.push(b)});pick(0);})();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
