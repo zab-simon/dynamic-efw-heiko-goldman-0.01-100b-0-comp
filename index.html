@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>dynamic efw heiko goldman 0.01-100b/0 comp</title>
+</head>
+<body>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* One screen, two zones: thesis left, evidence + entry right; stacks on portrait */
+:root{
+  --bg:#F2F4F7; --panel:#FFFFFF; --ink:#0E1A2B; --mute:#5A6577; --rule:#D5DBE3;
+  --accent:#1F4FD8; --alert:#C8203A; --on-accent:#FFFFFF; --tv-v:#1F4FD8; --tv-i:#A86A00; --tv-c:#11834F;
+  --f-disp:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A111D; --panel:#111B2B; --ink:#E7ECF3; --mute:#97A3B6; --rule:#243247;
+  --accent:#7C97FF; --alert:#FF5C72; --on-accent:#0A111D; --tv-v:#7C97FF; --tv-i:#F0B43C; --tv-c:#43D18C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A111D; --panel:#111B2B; --ink:#E7ECF3; --mute:#97A3B6; --rule:#243247;
+  --accent:#7C97FF; --alert:#FF5C72; --on-accent:#0A111D; --tv-v:#7C97FF; --tv-i:#F0B43C; --tv-c:#43D18C; color-scheme:dark}
+
+html{height:100%;font-size:clamp(10px,calc(0.5vw + 0.85vh),16.5px)}
+body{height:100%;background:var(--bg);color:var(--ink);font-family:var(--f-body);overflow:hidden}
+@media (max-height:540px){body{overflow:auto}}
+.deck{height:100%;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto auto;gap:1.1rem;
+  padding-block:1rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  max-width:1400px;margin:0 auto}
+@media (max-height:540px){.deck{height:auto}}
+
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:.6rem}
+.brand{font-family:var(--f-disp);font-weight:600;font-size:1.2rem;letter-spacing:.01em}
+.brand span{color:var(--mute);font-weight:500}
+.meta{font-family:var(--f-mono);font-size:.78rem;color:var(--mute);letter-spacing:.04em}
+
+main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.4rem;min-height:0}
+@media (max-aspect-ratio:1/1){main{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:1rem}}
+
+.thesis{display:flex;flex-direction:column;gap:1.05rem;min-width:0;min-height:0}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;color:var(--accent)}
+h1{font-family:var(--f-disp);font-weight:600;font-size:clamp(2.2rem,3.4rem,3.6rem);line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.lede{font-size:1.12rem;line-height:1.42;color:var(--ink);margin:0;max-width:58ch}
+.rows{display:grid;gap:.75rem}
+.row{display:grid;grid-template-columns:7.2rem minmax(0,1fr);gap:.9rem;padding-top:.7rem;border-top:1px solid var(--rule)}
+.row h2{font-family:var(--f-mono);font-weight:500;font-size:.78rem;letter-spacing:.06em;color:var(--mute);margin:0;padding-top:.12rem}
+.row p{margin:0;font-size:.98rem;line-height:1.4}
+.row b{font-weight:600}
+
+.evidence{display:flex;flex-direction:column;gap:1rem;min-width:0;min-height:0}
+.chart{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:.8rem .9rem .6rem}
+.chart .cap{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;font-family:var(--f-mono);font-size:.74rem;color:var(--mute)}
+.chart .cap b{color:var(--ink);font-weight:500}
+.chart{justify-content:center;gap:1rem}
+.big{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap}
+.big b{font-family:var(--f-disp);font-weight:600;font-size:3rem;line-height:1;color:var(--alert);font-variant-numeric:tabular-nums}
+.big span{font-size:.9rem;color:var(--mute);line-height:1.35;flex:1;min-width:12rem}
+.tl{display:grid;gap:.7rem}
+.tl-row{display:grid;grid-template-columns:5.2rem minmax(0,1fr);align-items:center;gap:.6rem}
+.tl-lbl{font-family:var(--f-disp);font-weight:600;font-size:1rem}
+.tl-lbl.acc{color:var(--accent)}
+.tl-track{position:relative;height:2.6rem}
+.tl-quiet{position:absolute;left:0;width:60%;top:.55rem;height:2px;background:var(--rule)}
+.tl-red{position:absolute;left:60%;width:40%;top:.1rem;height:1rem;background:var(--alert);border-radius:2px}
+.tl-blue{position:absolute;left:0;width:60%;top:.1rem;height:1rem;background:var(--accent);border-radius:2px}
+.tl-note{position:absolute;top:1.35rem;font-size:.82rem;line-height:1.2;white-space:nowrap}
+.tl-note.r{right:0;color:var(--alert)}
+.tl-note.b{left:0;color:var(--accent)}
+.tl-axis{position:relative;height:1.3rem;border-top:1px solid var(--rule);font-family:var(--f-mono);font-size:.72rem;color:var(--mute)}
+.tl-axis span{position:absolute;top:.3rem;white-space:nowrap}
+
+.entry h2{font-family:var(--f-mono);font-weight:500;font-size:.78rem;letter-spacing:.06em;color:var(--mute);margin:0 0 .5rem}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+.tile{border-top:2px solid var(--accent);padding-top:.5rem;display:flex;flex-direction:column;gap:.25rem}
+.tile h3{font-family:var(--f-disp);font-weight:600;font-size:1.05rem;margin:0}
+.tile p{margin:0;font-size:.86rem;line-height:1.35;color:var(--mute)}
+.tile .n{font-family:var(--f-mono);font-size:.84rem;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.live{font-family:var(--f-mono);font-size:.8rem;color:var(--mute);font-variant-numeric:tabular-nums}
+.live b{color:var(--alert);font-weight:500}
+.tl-red{transform-origin:left center;animation:loopred 2.5s cubic-bezier(.3,.7,.3,1) infinite}
+.tl-blue{transform-origin:left center;animation:loopblue 2.5s ease-out infinite}
+@keyframes loopblue{0%{transform:scaleX(0)}15%{transform:scaleX(1)}92%{transform:scaleX(1)}100%{transform:scaleX(1)}}
+@keyframes loopred{0%,18%{transform:scaleX(0)}55%{transform:scaleX(1)}92%{transform:scaleX(1)}100%{transform:scaleX(1)}}
+.tl-blue::after{content:"";position:absolute;left:-.35rem;top:.15rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--accent);animation:pulse 1.2s ease-out infinite}
+.tile{animation:glow 2.4s ease-in-out infinite}
+.tile:nth-child(2){animation-delay:.8s}.tile:nth-child(3){animation-delay:1.6s}
+@keyframes glow{0%,100%{border-top-color:var(--accent);border-top-width:2px}10%,25%{border-top-color:var(--alert);border-top-width:4px}35%{border-top-color:var(--accent);border-top-width:2px}}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent)}70%{box-shadow:0 0 0 .7rem transparent}100%{box-shadow:0 0 0 0 transparent}}
+@keyframes rise{from{opacity:.2;transform:translateY(.4rem)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.tl-red,.tl-blue,.tl-blue::after,.tile{animation:none}}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:.5rem 1.4rem;flex-wrap:wrap;background:var(--accent);color:var(--on-accent);border-radius:6px;padding:.7rem 1rem}
+.cta-msg{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.cta-msg b{font-family:var(--f-disp);font-weight:600;font-size:1.15rem;line-height:1.2}
+.cta-msg span{font-size:.82rem;opacity:.85}
+.cta-contact{display:flex;gap:1rem;flex-wrap:wrap;font-family:var(--f-mono);font-size:.84rem}
+.cta-contact span{user-select:all}
+.offer{display:flex;flex-wrap:wrap;gap:.25rem 1rem;margin-top:.6rem;font-size:.82rem;color:var(--mute)}
+.offer b{color:var(--alert);font-weight:600}
+.offer span::before{content:"· ";color:var(--rule)}
+main.commit{display:flex;flex-direction:column;gap:1.2rem;justify-content:center}
+.terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media (max-aspect-ratio:1/1){.terms{grid-template-columns:minmax(0,1fr);gap:.6rem}}
+.term{background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--accent);border-radius:6px;padding:.9rem 1rem;display:flex;flex-direction:column;gap:.4rem;min-width:0}
+.term h3{font-family:var(--f-disp);font-weight:600;font-size:1.3rem;margin:0}
+.term .amt{font-family:var(--f-mono);font-size:1.15rem;color:var(--alert);font-variant-numeric:tabular-nums}
+.term ul{margin:0;padding-left:1.1rem;display:grid;gap:.2rem;font-size:.92rem;line-height:1.35}
+.term:nth-child(1){animation:glow 2.4s ease-in-out infinite}.term:nth-child(2){animation:glow 2.4s ease-in-out .8s infinite}.term:nth-child(3){animation:glow 2.4s ease-in-out 1.6s infinite}
+.plan{display:grid;gap:.4rem}
+.plan-bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden}
+.plan-fill{height:100%;background:var(--accent);transform-origin:left center;animation:loopblue 2.5s ease-out infinite}
+.plan-steps{display:flex;justify-content:space-between;gap:.5rem;font-family:var(--f-mono);font-size:.76rem;color:var(--mute)}
+.plan-steps span{display:flex;flex-direction:column}
+.plan-steps span:last-child{text-align:right}
+.plan-steps b{color:var(--ink);font-weight:500}
+@media (prefers-reduced-motion:reduce){.term,.plan-fill{animation:none}}
+.flow{display:flex;flex-direction:column;gap:.25rem}
+.fn{display:flex;flex-direction:column;gap:.1rem;border:1px solid var(--rule);background:var(--panel);border-radius:6px;padding:.45rem .8rem}
+.fn b{font-family:var(--f-disp);font-weight:600;font-size:1.05rem}
+.fn span{font-size:.84rem;color:var(--mute)}
+.fn.acc{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.fa{text-align:center;color:var(--accent);font-size:.9rem;line-height:1;animation:drop 1.2s ease-in-out infinite}
+.fa:nth-of-type(2){animation-delay:.3s}.fa:nth-of-type(3){animation-delay:.6s}
+@keyframes drop{0%,100%{transform:translateY(-2px);opacity:.5}50%{transform:translateY(2px);opacity:1}}
+.fo{display:flex;flex-wrap:wrap;gap:.35rem}
+.fo i,.uni i{font-style:normal;font-family:var(--f-mono);font-size:.78rem;padding:.3rem .6rem;border-radius:3px;background:var(--panel);border:1px solid var(--rule)}
+.fo i{border-color:var(--accent);color:var(--accent)}
+.uni{display:flex;flex-wrap:wrap;gap:.35rem}
+.uni i.slot{border:1px dashed var(--accent);color:var(--accent);background:transparent;animation:slot 1.4s ease-in-out infinite}
+.share{gap:.6rem;justify-content:center}
+.sb{display:grid;grid-template-columns:4.6rem minmax(0,1fr) 3rem;align-items:center;gap:.5rem}
+.sb-l{font-family:var(--f-mono);font-size:.76rem;color:var(--mute)}
+.sb-t{position:relative;height:.9rem;background:var(--bg);border-radius:2px}
+.sb-base{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:2px 0 0 2px}
+.sb-up{position:absolute;top:0;bottom:0;background:color-mix(in srgb,var(--accent) 35%,transparent);transform-origin:left center;animation:loopblue 2.5s ease-out infinite}
+.sb-v{font-family:var(--f-mono);font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
+.sb-v.up{color:var(--accent);font-weight:500}
+@media (prefers-reduced-motion:reduce){.fa,.sb-up{animation:none}}
+main.fc{display:flex;flex-direction:column;gap:.9rem;min-height:0}
+.fc-keys{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-family:var(--f-mono);font-size:.76rem;color:var(--mute)}
+.fc-keys span{display:flex;align-items:center;gap:.35rem}
+.fc-keys i{display:inline-block;width:.9rem;height:.5rem;border-radius:1px}
+.k-max{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+.k-base{background:var(--accent)}
+.fc-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}
+@media (max-aspect-ratio:1/1){.fc-grid{grid-template-columns:minmax(0,1fr)}}
+.fc-c{padding:.6rem .7rem .4rem;gap:.3rem}
+.fc-cv{position:relative;flex:1;min-height:6rem}
+.ladder{display:grid;gap:.6rem}
+.ld{display:grid;grid-template-columns:4rem minmax(0,1fr) 6rem;align-items:center;gap:.6rem}
+.ld-l{font-family:var(--f-mono);font-size:.82rem;font-variant-numeric:tabular-nums}
+.ld-t{position:relative;height:.9rem;background:var(--bg);border-radius:2px;overflow:hidden}
+.ld-f{position:absolute;top:0;bottom:0;left:0;background:var(--accent);transform-origin:left center;animation:loopblue 2.5s ease-out infinite}
+.ld:nth-child(2) .ld-f{animation-delay:.2s}.ld:nth-child(3) .ld-f{animation-delay:.4s}.ld:nth-child(4) .ld-f{animation-delay:.6s}
+.ld-v{font-family:var(--f-mono);font-size:.74rem;color:var(--mute);text-align:right;white-space:nowrap}
+main.loi{display:flex;justify-content:center;min-height:0;overflow:auto}
+.loi-doc{width:100%;max-width:64rem;box-sizing:border-box;background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.75rem}
+.loi-h{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:.5rem}
+.loi-h h1{font-size:1.7rem}
+.loi-h span{font-family:var(--f-mono);font-size:.74rem;color:var(--alert);letter-spacing:.06em}
+.loi-parties{margin:0;font-size:.92rem;line-height:1.45}
+.loi-cl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem 1.6rem}
+@media (max-aspect-ratio:1/1){.loi-cl{grid-template-columns:minmax(0,1fr)}}
+.cl{min-width:0}
+.cl h3{font-family:var(--f-mono);font-weight:500;font-size:.74rem;letter-spacing:.06em;color:var(--mute);margin:0 0 .25rem}
+.cl p{margin:0;font-size:.88rem;line-height:1.45}
+.cl label{display:flex;gap:.45rem;align-items:baseline;flex-wrap:wrap;font-size:.88rem;line-height:1.6}
+.cl input{accent-color:var(--accent)}
+.fill{display:inline-block;min-width:2.2rem;border-bottom:1px dashed var(--accent);color:var(--accent);padding:0 .15rem;outline:none}
+.fill:focus{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.sig{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem;padding-top:1.8rem}
+.sig div{border-top:1px solid var(--ink);padding-top:.3rem;font-size:.8rem;color:var(--mute)}
+.sig b{display:block;color:var(--ink);font-weight:500}
+.sig div.here{border-top:2px dashed var(--accent);color:var(--accent);animation:slot 1.4s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.ld-f,.sig div.here{animation:none}}
+main.cdpn{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;gap:.5rem}
+.cd-h h1{font-size:clamp(1.6rem,2.8rem,3rem)}
+.cd-fig{margin:0;min-height:0;background:var(--panel);border:1px solid var(--rule);border-radius:6px;display:flex;padding:.3rem}
+.cd-fig svg{width:100%;height:100%;display:block}
+.cd-rot{display:grid;gap:.3rem}.cd-row{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}.cd-rot{font-family:var(--f-mono);font-size:.72rem;color:var(--mute)}
+.cd-rot button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:.2rem .5rem;cursor:pointer}
+.cd-rot button[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.cd-ring{fill:none;stroke:var(--rule);stroke-width:1}
+.cd-e{fill:none;stroke:var(--mute);stroke-width:1.2;stroke-dasharray:6 5;animation:cdflow 1.2s linear infinite}
+.cd-e.m{stroke:var(--accent)}
+.cd-ah{fill:var(--mute)}.cd-ah.m{fill:var(--accent)}
+@keyframes cdflow{to{stroke-dashoffset:-22}}
+@media (prefers-reduced-motion:reduce){.cd-e{animation:none}}
+.cd-l{font-family:var(--f-mono);fill:var(--mute);paint-order:stroke;stroke:var(--panel);stroke-width:4px;stroke-linejoin:round}
+.cd-l.m{fill:var(--accent)}
+.cd-n{cursor:pointer}
+.cd-n rect{fill:var(--panel);stroke:var(--ink);stroke-width:1}
+.cd-n.core rect{fill:var(--accent);stroke:var(--accent)}
+.cd-n text{font-family:var(--f-disp);font-weight:600;fill:var(--ink)}
+.cd-n text.s{font-family:var(--f-mono);font-weight:400;fill:var(--mute)}
+.cd-n.core text,.cd-n.core text.s{fill:var(--on-accent)}
+.cd-n.agi rect{fill:color-mix(in srgb,var(--alert) 9%,var(--panel));stroke:var(--alert)}.cd-n.agi text,.cd-n.agi text.s{fill:var(--alert)}
+.cd-n.k rect{fill:color-mix(in srgb,var(--accent) 10%,var(--panel));stroke:var(--accent)}.cd-n.k text,.cd-n.k text.s{fill:var(--accent)}
+.cd-n.ctr rect,.cd-n.cp rect{stroke-width:2.6}
+.c2-b{fill:var(--panel);stroke:var(--mute);stroke-width:1}
+.c2-k{fill:color-mix(in srgb,var(--accent) 10%,var(--panel));stroke:var(--accent);stroke-width:1}
+.c2-a{fill:color-mix(in srgb,var(--alert) 9%,var(--panel));stroke:var(--alert);stroke-width:1}
+.c2-p{fill:none;stroke:var(--mute);stroke-width:1;stroke-dasharray:8 6}
+.c2-t{font-family:var(--f-disp);font-weight:600;font-size:23px;fill:var(--ink)}
+.c2-t.k{fill:var(--accent)}.c2-t.a{fill:var(--alert)}
+.c2-s{font-family:var(--f-body);font-size:17px;fill:var(--mute)}
+.c2-s.k{fill:var(--accent)}.c2-s.a{fill:var(--alert)}
+.c2-leg{font-family:var(--f-mono);font-size:.72rem;color:var(--mute)}
+.tlv-h{display:grid;gap:.2rem;min-width:0}
+.tlv-h h1{font-size:clamp(1.6rem,2.8rem,3rem)}
+.tlv-sub{font-family:var(--f-mono);font-size:.74rem;color:var(--mute);min-width:0;overflow-wrap:anywhere}
+.tv-lane{font-family:var(--f-mono);font-size:11px;fill:var(--ink);font-weight:500}
+.tv-mt{font-family:var(--f-mono);font-size:11px;fill:var(--mute)}
+.tv-ms{fill:var(--ink)}.tv-ms.cmp{fill:var(--panel);stroke:var(--ink);stroke-width:1}
+.tv-grid{stroke:var(--rule);stroke-width:.5}.tv-grid.maj{stroke-width:1}
+.tv-base,.tv-tick{stroke:var(--mute);stroke-width:.8}
+.tv-ax{font-family:var(--f-mono);font-size:11px;fill:var(--mute)}
+.tv-q{font-family:var(--f-mono);font-size:9px;fill:var(--mute)}
+.tv-l{fill:none;stroke-width:1.7}.tv-l.cmp{stroke-width:1.2;stroke-dasharray:6 4;animation:tvflow 1.4s linear infinite}
+.tv-v{stroke:var(--tv-v);fill:var(--tv-v)}.tv-i{stroke:var(--tv-i);fill:var(--tv-i)}.tv-c{stroke:var(--tv-c);fill:var(--tv-c)}
+.tv-l.tv-v,.tv-l.tv-i,.tv-l.tv-c{fill:none}
+.tv-end{font-family:var(--f-mono);font-size:11.5px;stroke:none}
+.tv-now{stroke:var(--alert);stroke-width:1;stroke-dasharray:3 3}
+.tv-nowt{font-family:var(--f-mono);font-size:11px;fill:var(--alert)}
+.tv-pulse{fill:var(--alert);transform-box:fill-box;transform-origin:center;animation:tvpulse 2s ease-in-out infinite}
+.tv-guide{stroke:var(--ink);stroke-width:.6}
+.tv-tip{fill:var(--panel);stroke:var(--rule)}
+.tv-tt{font-family:var(--f-mono);font-size:11px;stroke:none;fill:var(--ink)}.tv-tt.h{font-weight:600}
+@keyframes tvflow{to{stroke-dashoffset:-20}}
+@keyframes tvpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.8);opacity:.35}}
+@media (prefers-reduced-motion:reduce){.tv-l.cmp,.tv-pulse{animation:none}}
+.tabs{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.3rem;opacity:.55;margin-top:-.5rem}
+.tabs:hover{opacity:1}
+.tabs a{font-family:var(--f-mono);font-size:.68rem;color:var(--mute);text-decoration:none;padding:.15rem .5rem;border:1px solid transparent;border-radius:3px}
+.tabs a[aria-current="page"]{background:var(--panel);color:var(--ink);border-color:var(--rule)}
+.tabs a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.race{gap:.75rem;justify-content:center}
+.rc{display:grid;grid-template-columns:5rem minmax(0,1fr);align-items:center;gap:.6rem}
+.rc-c{font-family:var(--f-disp);font-weight:600;font-size:1rem}
+.rc-d{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}
+.rc-d i{font-style:normal;font-family:var(--f-mono);font-size:.74rem;padding:.2rem .5rem;border-radius:3px;background:var(--bg);border:1px solid var(--rule)}
+.rc.de .rc-c{color:var(--alert)}
+.rc.de b{font-family:var(--f-disp);font-size:2rem;line-height:1;color:var(--alert);margin-right:.4rem}
+.rc-d i.slot{border:1px dashed var(--accent);color:var(--accent);background:transparent;animation:slot 1.4s ease-in-out infinite}
+@keyframes slot{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 0 .35rem color-mix(in srgb,var(--accent) 25%,transparent)}}
+.rc:not(.de) .rc-d i{animation:blink 2.4s ease-in-out infinite}
+.rc:not(.de) .rc-d i:nth-child(2){animation-delay:.3s}.rc:not(.de) .rc-d i:nth-child(3){animation-delay:.6s}.rc:not(.de) .rc-d i:nth-child(4){animation-delay:.9s}.rc:not(.de) .rc-d i:nth-child(5){animation-delay:1.2s}
+@keyframes blink{0%,100%{border-color:var(--rule)}20%{border-color:var(--ink)}}
+@media (prefers-reduced-motion:reduce){.rc-d i,.rc-d i.slot{animation:none}}
+.foot{display:flex;justify-content:space-between;gap:.4rem 1.2rem;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:.55rem;
+  font-family:var(--f-mono);font-size:.76rem;color:var(--mute)}
+.foot b{color:var(--ink);font-weight:500}
+.foot span{user-select:all}
+</style>
+
+<div class="deck">
+  <header class="top">
+    <div class="brand">AGI Labs <span>· Sovereign AI for Germany</span></div>
+  </header>
+
+  <main data-view="hessen" hidden>
+    <section class="thesis">
+      <div class="eyebrow">FOR GERMANY</div>
+      <h1>Germany's own AGI.</h1>
+      <p class="lede">The race to AGI and ASI is now the US against China. A sovereign alternative to Anthropic and Palantir puts Germany in it: one AGI model and one decision platform, built in Germany for state, banks and industry.</p>
+      <div class="rows">
+        <div class="row"><h2>THE GAP</h2><p>The US and China each field five AGI labs. <b>Germany fields none.</b> Its ministries, banks and plants run on US models and US platforms.</p></div>
+        <div class="row"><h2>INTERCONNECT</h2><p><b>DE-CIX Frankfurt</b>: Germany's fastest link to the US, the one point the stack needs there.</p></div>
+        <div class="row"><h2>WHAT WE BUILD</h2><p>Model layer of the Anthropic class plus operating layer of the Palantir class. <b>Built from zero, IP in Germany.</b></p></div>
+      </div>
+    </section>
+
+    <section class="evidence">
+      <figure class="chart race" style="margin:0">
+        <div class="cap"><span><b>Who races for AGI / ASI</b> · 2026</span></div>
+        <div class="rc"><span class="rc-c">USA</span><div class="rc-d"><i>OpenAI</i><i>Anthropic</i><i>Google</i><i>Meta</i><i>xAI</i></div></div>
+        <div class="rc"><span class="rc-c">China</span><div class="rc-d"><i>DeepSeek</i><i>Alibaba</i><i>Moonshot</i><i>Zhipu</i><i>ByteDance</i></div></div>
+        <div class="rc"><span class="rc-c">France</span><div class="rc-d"><i>Mistral</i></div></div>
+        <div class="rc de"><span class="rc-c">Germany</span><div class="rc-d"><b>0</b><i class="slot">AGI Labs</i></div></div>
+      </figure>
+
+      <div class="entry">
+        <h2>WHAT GERMANY CAN DO NOW</h2>
+        <div class="tiles">
+          <div class="tile"><h3>Compute</h3><p>Sovereign cluster in Germany, linked via DE-CIX.</p><span class="n">IP in Germany</span></div>
+          <div class="tile"><h3>First users</h3><p>Federal administration, banks and industry.</p><span class="n">pilots 90 days</span></div>
+          <div class="tile"><h3>Co-funding</h3><p>Federal and EU lines alongside private capital.</p><span class="n">i state + private</span></div>
+        </div>
+        <div class="offer"><b>Until 31 Dec 2026</b><span>First partners to commit shape the roadmap</span><span>NVIDIA / AWS as co-investors: latest hardware, part of cluster cost covered · in pipeline</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cta" data-view="hessen" hidden>
+    <div class="cta-msg"><b>Put Germany in the AGI race.</b><span>20 minutes this week · Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="commit" class="commit" hidden>
+    <section class="c-head">
+      <div class="eyebrow">THREE WAYS TO COMMIT THIS WEEK</div>
+      <h1>Own AGI Core/Model → Margin → Monopoly</h1>
+      <p class="lede">Sign now. Cluster live in 30 days.</p>
+    </section>
+    <section class="terms">
+      <article class="term"><h3>Offtake</h3><div class="amt">c €3–8m / yr</div><ul><li>Per bank, 3 years</li><li>LOI now, binding on pilot success</li><li>Success: ≥2 of 4 past crises flagged ≥24h early</li></ul></article>
+      <article class="term"><h3>Prepaid pilot</h3><div class="amt">c €2–5m</div><ul><li>50% at signing, 50% at day 90</li><li>Data never leaves your perimeter</li><li>Criteria missed: second half not due</li></ul></article>
+      <article class="term"><h3>Investment</h3><div class="amt">i €10–50m</div><ul><li>Close within 30 days</li><li>Pro-rata and information rights</li><li>Cluster financed first</li></ul></article>
+    </section>
+    <section class="plan" aria-label="Timeline">
+      <div class="plan-bar"><div class="plan-fill"></div></div>
+      <div class="plan-steps"><span><b>Day 0</b>sign</span><span><b>Day 30</b>cluster live</span><span><b>Day 90</b>replay result</span><span><b>Day 120</b>live shadow</span></div>
+    </section>
+  </main>
+
+  <footer class="cta" data-view="commit" hidden>
+    <div class="cta-msg"><b>First signed partner gets 12-month exclusivity.</b><span>Draft terms, non-binding until signed · Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="openai" hidden>
+    <section class="thesis">
+      <div class="eyebrow">PROPOSED PARTNERSHIP · OPENAI</div>
+      <h1>Bring OpenAI into Germany's boardrooms.</h1>
+      <p class="lede">Until sovereign self-learning models reach corporate scale, German boards should run on the best models now.</p>
+      <div class="flow">
+        <div class="fn"><b>OpenAI</b><span>frontier models · strategic guidance</span></div>
+        <div class="fa">↓</div>
+        <div class="fn acc"><b>AGI Labs</b><span>access to supervisory boards, majority owners, CEOs</span></div>
+        <div class="fa">↓</div>
+        <div class="fn"><b>Board academy</b><span>top management trained on frontier models</span></div>
+        <div class="fa">↓</div>
+        <div class="fo"><i>Full automation</i><i>Robot &amp; car brains</i><i>Vertical integration</i></div>
+      </div>
+    </section>
+
+    <section class="evidence">
+      <figure class="chart share" style="margin:0">
+        <div class="cap"><span><b>OpenAI share, enterprise AI</b> · baseline ≈</span><span>+5 pp / yr</span></div>
+        <div class="sb"><span class="sb-l">EU today</span><div class="sb-t"><div class="sb-base" style="width:30%"></div></div><span class="sb-v">≈30%</span></div>
+        <div class="sb"><span class="sb-l">EU 2028</span><div class="sb-t"><div class="sb-base" style="width:30%"></div><div class="sb-up" style="left:30%;width:10%"></div></div><span class="sb-v up">≈40%</span></div>
+        <div class="sb"><span class="sb-l">DE today</span><div class="sb-t"><div class="sb-base" style="width:28%"></div></div><span class="sb-v">≈28%</span></div>
+        <div class="sb"><span class="sb-l">DE 2028</span><div class="sb-t"><div class="sb-base" style="width:28%"></div><div class="sb-up" style="left:28%;width:10%"></div></div><span class="sb-v up">≈38%</span></div>
+        <div class="live">Dark: today · light: added through AGI Labs, +10 pp by 2028</div>
+      </figure>
+      <div class="entry">
+        <h2>AGI UNITS AT 10 UNIVERSITIES · FIRST FIVE</h2>
+        <div class="uni"><i>Munich</i><i>Karlsruhe</i><i>Aachen</i><i>Tübingen</i><i>Berlin</i><i class="slot">+5</i></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cta" data-view="openai" hidden>
+    <div class="cta-msg"><b>+5 pp OpenAI share per year in Germany and the EU.</b><span>Prepared for Christoph Winter, GTM Leader EMEA Central, OpenAI · Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="forecast" class="fc" hidden>
+    <section class="fc-head">
+      <div class="eyebrow">20-YEAR FORECAST · SELF-IMPROVING AGI · SWARM INTELLIGENCE</div>
+      <h1>2027 → 2046: from first revenue to the AGI market.</h1>
+      <div class="fc-keys"><span><i class="k-max"></i>Max · p≈0.5–1%</span><span><i class="k-base"></i>Base · p≈2–5%</span><span>AGI market 2026: $5T+ · S-curve 30%→10% / yr</span></div>
+    </section>
+    <section class="fc-grid">
+      <figure class="chart fc-c" style="margin:0"><div class="cap"><span><b>Revenue</b> · $ / yr</span><span>2046 max $179T</span></div><div class="fc-cv"><canvas id="fcRev" role="img" aria-label="Revenue forecast 2027 to 2046">Revenue: 2030 base $3b, max $50b; 2046 base $27T, max $179T</canvas></div></figure>
+      <figure class="chart fc-c" style="margin:0"><div class="cap"><span><b>Valuation</b> · v $</span><span>vs OpenAI, Anthropic, Nvidia today ≈</span></div><div class="fc-cv"><canvas id="fcVal" role="img" aria-label="Valuation forecast 2027 to 2046">Valuation: 2030 base v $90b, max v $2T; 2046 base v $270T, max v $1,800T</canvas></div></figure>
+      <figure class="chart fc-c" style="margin:0"><div class="cap"><span><b>Global AGI market share</b></span><span>2046 max 100%</span></div><div class="fc-cv"><canvas id="fcSh" role="img" aria-label="Market share forecast 2027 to 2046">Share: 2030 base 0.02%, max 0.35%; 2046 base 15%, max 100%</canvas></div></figure>
+    </section>
+  </main>
+
+  <footer class="cta" data-view="forecast" hidden>
+    <div class="cta-msg"><b>Never cap the upside. Join before the curve bends.</b><span>Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="compute" hidden>
+    <section class="thesis">
+      <div class="eyebrow">CLIENTS FOR COMPUTE</div>
+      <h1>Your own AI cluster, inside your perimeter.</h1>
+      <p class="lede">Start at €1m. Scale to €10b. Built by a hyperscale partner, financed against signed demand, filled by the clients we bring.</p>
+      <div class="rows">
+        <div class="row"><h2>PARTNER</h2><p>Cluster built and run <b>inside your own data centre</b>, newest Nvidia generation first.</p></div>
+        <div class="row"><h2>FINANCING</h2><p><b>GPU-backed debt</b> arranged against offtake contracts, not against your balance sheet.</p></div>
+        <div class="row"><h2>DEMAND</h2><p>AGI Labs brings <b>banks and industry as tenants</b> and trains sovereign models on site. In return: priority compute.</p></div>
+      </div>
+    </section>
+    <section class="evidence">
+      <figure class="chart" style="margin:0;gap:.8rem;justify-content:center">
+        <div class="cap"><span><b>Scale path</b> · Rubin-class GPUs, all-in ≈ €150–200k each</span></div>
+        <div class="ladder">
+          <div class="ld"><span class="ld-l">€1m</span><div class="ld-t"><div class="ld-f" style="width:20%"></div></div><span class="ld-v">pilot node</span></div>
+          <div class="ld"><span class="ld-l">€100m</span><div class="ld-t"><div class="ld-f" style="width:60%"></div></div><span class="ld-v">≈600 GPU</span></div>
+          <div class="ld"><span class="ld-l">€1b</span><div class="ld-t"><div class="ld-f" style="width:80%"></div></div><span class="ld-v">≈6k GPU</span></div>
+          <div class="ld"><span class="ld-l">€10b</span><div class="ld-t"><div class="ld-f" style="width:100%"></div></div><span class="ld-v">≈60k GPU</span></div>
+        </div>
+      </figure>
+      <div class="entry">
+        <h2>EVERY PARTY WINS</h2>
+        <div class="tiles">
+          <div class="tile"><h3>Cluster owner</h3><p>Paying tenants from day one.</p><span class="n">full utilisation</span></div>
+          <div class="tile"><h3>Bank</h3><p>Secured lending plus the capital-markets mandate.</p><span class="n">fees 1–7%</span></div>
+          <div class="tile"><h3>Client</h3><p>Sovereign compute and models, no capex.</p><span class="n">c per use</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cta" data-view="compute" hidden>
+    <div class="cta-msg"><b>Commit to a pilot node this quarter. We bring the tenants.</b><span>Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="loi" class="loi" hidden>
+    <article class="loi-doc">
+      <div class="loi-h"><h1>Letter of Intent</h1><span>DRAFT FOR DISCUSSION</span></div>
+      <p class="loi-parties">Between <b>AGI Labs GmbH i.G.</b>, Karlsruhe (“AGI Labs”) and <span class="fill" contenteditable="true">[Counterparty, city]</span> (“Partner”).</p>
+      <div class="loi-cl">
+        <div class="cl"><h3>1 · PURPOSE</h3><p>The parties intend to work together on <span class="fill" contenteditable="true">a sovereign early-warning pilot</span> and the compute it runs on.</p></div>
+        <div class="cl"><h3>2 · INTENDED COMMITMENT</h3>
+          <label for="loi-off"><input type="checkbox" id="loi-off">Offtake c €<span class="fill" contenteditable="true">3–8m</span> / yr for <span class="fill" contenteditable="true">3</span> years</label>
+          <label for="loi-pre"><input type="checkbox" id="loi-pre">Prepaid pilot c €<span class="fill" contenteditable="true">2–5m</span>, 50% at signing</label>
+          <label for="loi-cmp"><input type="checkbox" id="loi-cmp">Priority compute <span class="fill" contenteditable="true">__</span> MW</label>
+          <label for="loi-ip"><input type="checkbox" id="loi-ip">IP licence or co-development of <span class="fill" contenteditable="true">__</span></label>
+          <label for="loi-inv"><input type="checkbox" id="loi-inv">Investment i €<span class="fill" contenteditable="true">10–50m</span></label>
+        </div>
+        <div class="cl"><h3>3 · TIMELINE</h3><p>Definitive agreement within 30 days of this letter. Pilot starts within 30 days of that agreement.</p></div>
+        <div class="cl"><h3>4 · BINDING TERMS</h3><p>Only confidentiality (24 months), exclusivity (<span class="fill" contenteditable="true">12</span> months) and governing law (Germany, courts of Karlsruhe) bind the parties. All other terms state intentions.</p></div>
+        <div class="cl"><h3>5 · VALIDITY</h3><p>Open for signature until 31 December 2026.</p></div>
+      </div>
+      <div class="sig">
+        <div><b>AGI Labs</b>Semen Zabelyshenskiy (Simon Zab), CEO · date</div>
+        <div class="here"><b>Partner</b>Name, title · date</div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="cta" data-view="loi" hidden>
+    <div class="cta-msg"><b>Fill it in together. Sign today. Pilot live in 60 days.</b><span>Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="cdpn" class="cdpn" hidden>
+    <div class="cd-h"><h1>Control / Data / Pipelines / Nodes</h1></div>
+    <figure class="cd-fig"><svg id="cdSvg1" role="img" aria-label="Round table of players and flows; choose the counterpart and who sits in the centre"></svg></figure>
+    <div class="cd-rot" id="cdCtl1" role="group" aria-label="Scheme controls"></div>
+  </main>
+
+  <footer class="cta" data-view="cdpn" hidden>
+    <div class="cta-msg"><b>Take your seat at the table. Seats close 31 Dec 2026.</b><span>Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="cdpn2" class="cdpn" hidden>
+    <div class="cd-h"><h1>Control / Data / Pipelines / Nodes</h1></div>
+    <figure class="cd-fig"><svg id="cdSvg2" role="img" aria-label="Rectangular scheme of players and flows; choose the counterpart and who sits in the centre"></svg></figure>
+    <div class="cd-rot" id="cdCtl2" role="group" aria-label="Scheme controls"></div>
+    <div class="c2-leg">i — investment · c — payment · 1–10% — arranger fee (Goldman, JPM) · ≈</div>
+  </main>
+
+  <footer class="cta" data-view="cdpn2" hidden>
+    <div class="cta-msg"><b>Put the cluster inside your perimeter. First pilot node this quarter.</b><span>Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="t" class="cdpn" hidden>
+    <div class="tlv-h"><h1>Timeline</h1><span class="tlv-sub">2026 → 2076 · Compute (SPV) and AGI · max scenario, p≈0.5–1% · € log scale · v valuation · i funding total · c revenue</span></div>
+    <figure class="cd-fig"><svg id="tvSvg" role="img" aria-label="Timeline 2026 to 2076: valuation, total funding and revenue for Compute (SPV) and AGI, with milestones"></svg></figure>
+    <div class="cd-rot" id="tvCtl" role="group" aria-label="Starting points"></div>
+  </main>
+
+  <footer class="cta" data-view="t" hidden>
+    <div class="cta-msg"><b>The earliest point on this curve is the best seat.</b><span>Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+
+  <main data-view="banks" hidden>
+    <section class="thesis">
+      <div class="eyebrow">EARLY WARNING FOR SYSTEMIC BANKS</div>
+      <h1>See the run before the run.</h1>
+      <p class="lede">A sovereign model, trained from zero inside your perimeter, that reads state decisions and depositor behaviour hours to days before they reach the balance sheet.</p>
+      <div class="rows">
+        <div class="row"><h2>BLIND SPOT</h2><p>Aladdin and Foundry model the book you already hold. Neither models <b>Washington, Beijing, Brussels or the depositor crowd</b> before they move.</p></div>
+        <div class="row"><h2>FROM ZERO</h2><p>A new model built for this one problem and trained on your streams. <b>Market, payment and policy data in; liquidity, exposure and control-loss probabilities out.</b> No US cloud, IP in Germany.</p></div>
+        <div class="row"><h2>PROOF · 90 D</h2><p>Blind replay of 2008, 2020, SVB and Credit Suisse 2023 on your data, then live shadow mode on one desk.</p></div>
+      </div>
+    </section>
+
+    <section class="evidence">
+      <figure class="chart" style="margin:0">
+        <div class="big"><b>$1.75b</b><span>lost per hour once a run starts · SVB, 9 March 2023, $42b in 24h</span></div>
+        <div class="live">Since you opened this page, a run at that pace has drained <b id="ctr">$0</b></div>
+        <div class="tl">
+          <div class="tl-row">
+            <div class="tl-lbl">Today</div>
+            <div class="tl-track">
+              <div class="tl-quiet"></div>
+              <div class="tl-red"></div>
+              <div class="tl-note r">first alarm: money already gone</div>
+            </div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-lbl acc">With us</div>
+            <div class="tl-track">
+              <div class="tl-blue"></div>
+              <div class="tl-note b">alarm 72h earlier · time to stop the outflow</div>
+            </div>
+          </div>
+          <div class="tl-row"><div></div><div class="tl-axis"><span style="left:0">−72h</span><span style="left:60%;transform:translateX(-50%)">run starts</span><span style="right:0">+24h</span></div></div>
+        </div>
+      </figure>
+
+      <div class="entry">
+        <h2>WHAT PARTNERS FUND</h2>
+        <div class="tiles">
+          <div class="tile"><h3>The cluster</h3><p>Finance a dedicated GPU cluster inside your own perimeter. You own the hardware.</p><span class="n">i €25–60m</span></div>
+          <div class="tile"><h3>The pilot</h3><p>90-day replay of past crises on your data, then live shadow run.</p><span class="n">c €2–5m</span></div>
+          <div class="tile"><h3>The core</h3><p>Strategic stake in the sovereign model.</p><span class="n">i €10–50m</span></div>
+        </div>
+        <div class="offer"><b>Until 31 Dec 2026</b><span>First bank: 12-month exclusivity</span><span>NVIDIA / AWS as co-investors: latest hardware, part of cluster cost covered · in pipeline</span><span>Ex-ECB / BaFin advisor · in pipeline</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cta" data-view="banks" hidden>
+    <div class="cta-msg"><b>Pick one desk. We replay SVB 2023 on it, inside your perimeter, in 90 days.</b><span>20 minutes this week · Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+  <nav class="tabs" aria-label="Views"><a href="#banks" data-v="banks">Banks</a><a href="#hessen" data-v="hessen">Germany</a><a href="#commit" data-v="commit">Margin→Monopoly</a><a href="#openai" data-v="openai">OpenAI</a><a href="#forecast" data-v="forecast">20Y Forecast</a><a href="#compute" data-v="compute">Compute</a><a href="#loi" data-v="loi">LOI</a><a href="#cdpn" data-v="cdpn">CDPN</a><a href="#cdpn2" data-v="cdpn2">CDPN 2</a><a href="#t" data-v="t">T</a></nav>
+<script>
+(function(){var el=document.getElementById('ctr');if(!el)return;var t0=performance.now(),rate=42e9/86400000;
+function f(v){return v>=1e9?'$'+(v/1e9).toFixed(2)+'b':v>=1e6?'$'+(v/1e6).toFixed(1)+'m':'$'+Math.round(v/1e3)+'k'}
+setInterval(function(){el.textContent=f((performance.now()-t0)*rate)},100);})();
+(function(){function show(){var v=(location.hash||'#banks').slice(1);if(['hessen','commit','openai','forecast','compute','loi','cdpn','cdpn2','t'].indexOf(v)<0)v='banks';
+document.querySelectorAll('[data-view]').forEach(function(e){e.hidden=e.getAttribute('data-view')!==v});
+document.querySelectorAll('.tabs a').forEach(function(a){a.setAttribute('aria-current',a.dataset.v===v?'page':'false')})}
+window.addEventListener('hashchange',show);show();})();
+function CDPN(o){
+var svg=document.getElementById(o.svg),ctl=document.getElementById(o.ctl);if(!svg)return;
+var NS='http://www.w3.org/2000/svg',N=o.nodes,E=o.edges,K=N.length,A=o.agi,PI2=Math.PI*2,R=o.R||240,RW=o.RW||330,RH=o.RH||215;
+var st={cp:o.cp,mode:o.mode,rot:0},cur=null,fitted=0,raf=0;
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e}
+function f(v){return (+v).toFixed(1)}
+var defs=el('defs',{},svg),mA=o.svg+'A',mM=o.svg+'M';
+[[mA,'cd-ah'],[mM,'cd-ah m']].forEach(function(m){var k=el('marker',{id:m[0],viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},defs);el('path',{'class':m[1],d:'M0 0L10 5L0 10z'},k)});
+var g=el('g',{},svg);svg.setAttribute('viewBox','-560 -380 1120 760');
+var HW=N.map(function(n){var w=n.t.length*9.4;(n.s||[]).forEach(function(s){w=Math.max(w,s.length*7.3)});return w/2+14}),
+    HH=N.map(function(n){return 16+9.5*(n.s||[]).length});
+var REV={};E.forEach(function(e){REV[e[0]+'>'+e[1]]=1});
+function layout(s){var c=s.mode==='agi'?A:s.cp,top=s.mode==='agi'?s.cp:A,ring=o.order.filter(function(i){return i!==c}),n=ring.length,k0=ring.indexOf(top),L={c:c,n:n,slot:{},t:{}};
+ ring.forEach(function(id,k){var q=((k-k0+s.rot)%n+n)%n;L.slot[id]=q;L.t[id]=q/n});return L}
+function pos(t){if(o.shape==='circle'){var a=-Math.PI/2+t*PI2;return [R*Math.cos(a),R*Math.sin(a)]}
+ var W=2*RW,H=2*RH,s=(((t%1)+1)%1)*(2*W+2*H);if(s<RW)return [s,-RH];s-=RW;if(s<H)return [RW,-RH+s];s-=H;if(s<W)return [RW-s,RH];s-=W;if(s<H)return [-RW,RH-s];s-=H;return [-RW+s,-RH]}
+function exitT(i,ux,uy){return Math.min(Math.abs(ux)>1e-6?HW[i]/Math.abs(ux):1e9,Math.abs(uy)>1e-6?HH[i]/Math.abs(uy):1e9)+7}
+function draw(P,T,L,settled){g.textContent='';
+ if(o.shape==='circle')el('circle',{cx:0,cy:0,r:R,'class':'cd-ring'},g);else el('rect',{x:-RW,y:-RH,width:2*RW,height:2*RH,rx:22,'class':'cd-ring'},g);
+ var c=L.c;el('rect',{x:f(P[c][0]-HW[c]-16),y:f(P[c][1]-HH[c]-16),width:f(2*HW[c]+32),height:f(2*HH[c]+32),rx:14,'class':'c2-p'},g);
+ E.forEach(function(e){var i=e[0],j=e[1],m=e[3],cls='cd-e'+(m?' m':''),mk='url(#'+(m?mM:mA)+')',rev=REV[j+'>'+i],lx,ly,anc='middle';
+  var adj=o.shape==='circle'&&settled!==false&&T[i]!=null&&T[j]!=null&&(((L.slot[j]-L.slot[i])%L.n+L.n)%L.n===1||((L.slot[i]-L.slot[j])%L.n+L.n)%L.n===1);
+  if(adj){var sg=((L.slot[j]-L.slot[i])%L.n+L.n)%L.n===1?1:-1,off=rev?sg*13:0,r=R+off,ai=-Math.PI/2+T[i]*PI2,aj=ai+sg*PI2/L.n;
+   var di=exitT(i,-Math.sin(ai),Math.cos(ai))/R,dj=exitT(j,-Math.sin(aj),Math.cos(aj))/R,a0=ai+sg*di,a1=aj-sg*dj,am=(a0+a1)/2,out=off>=0;
+   var p0=[r*Math.cos(a0),r*Math.sin(a0)],p1=[r*Math.cos(a1),r*Math.sin(a1)],lr=out?r+22:r-30;
+   el('path',{d:'M'+f(p0[0])+' '+f(p0[1])+'A'+r+' '+r+' 0 0 '+(sg>0?1:0)+' '+f(p1[0])+' '+f(p1[1]),'class':cls,'marker-end':mk},g);
+   lx=lr*Math.cos(am);ly=lr*Math.sin(am);var cc=Math.cos(am)*(out?1:-1);anc=cc>.3?'start':cc<-.3?'end':'middle';
+  }else{var A0=P[i],B0=P[j],dx=B0[0]-A0[0],dy=B0[1]-A0[1],Ln=Math.hypot(dx,dy)||1,ux=dx/Ln,uy=dy/Ln,nx=-uy,ny=ux,o2=rev?8:0;
+   var bow=0;if(i!==c&&j!==c){var C0=P[c],q=Math.max(0,Math.min(Ln,(C0[0]-A0[0])*ux+(C0[1]-A0[1])*uy)),qx=A0[0]+ux*q-C0[0],qy=A0[1]+uy*q-C0[1],dd=Math.hypot(qx,qy),clr=Math.max(HW[c],HH[c])+46;
+    if(dd<clr){var sx=dd>1?qx/dd:nx,sy=dd>1?qy/dd:ny;bow=2*(clr-dd)+(rev&&i>j?34:0);var bx=sx*bow,by=sy*bow}}
+   if(bow){var Mx=(A0[0]+B0[0])/2+bx,My=(A0[1]+B0[1])/2+by,s0x=Mx-A0[0],s0y=My-A0[1],s0=Math.hypot(s0x,s0y),e0x=B0[0]-Mx,e0y=B0[1]-My,e0=Math.hypot(e0x,e0y);
+    var t1=exitT(i,s0x/s0,s0y/s0),t2=exitT(j,e0x/e0,e0y/e0),X0=A0[0]+s0x/s0*t1,Y0=A0[1]+s0y/s0*t1,X1=B0[0]-e0x/e0*t2,Y1=B0[1]-e0y/e0*t2;
+    el('path',{d:'M'+f(X0)+' '+f(Y0)+'Q'+f(Mx)+' '+f(My)+' '+f(X1)+' '+f(Y1),'class':cls,'marker-end':mk},g);
+    lx=.25*X0+.5*Mx+.25*X1;ly=.25*Y0+.5*My+.25*Y1;
+   }else{var ti=exitT(i,ux,uy),tj=exitT(j,ux,uy);
+   el('path',{d:'M'+f(A0[0]+ux*ti+nx*o2)+' '+f(A0[1]+uy*ti+ny*o2)+'L'+f(B0[0]-ux*tj+nx*o2)+' '+f(B0[1]-uy*tj+ny*o2),'class':cls,'marker-end':mk},g);
+   var mid=(ti+(Ln-tj))/2;lx=A0[0]+ux*mid+nx*(rev?22:0);ly=A0[1]+uy*mid+ny*(rev?22:0);}}
+  if(e[2]){var tx=el('text',{x:f(lx),y:f(ly),'text-anchor':anc,'dominant-baseline':'middle','font-size':14,'class':'cd-l'+(m?' m':'')},g);tx.textContent=e[2];}});
+ N.forEach(function(n,i){var p=P[i],cls='cd-n'+(n.c?' '+n.c:'')+(i===c?' ctr':'')+(i===st.cp?' cp':''),ng=el('g',{'class':cls},g),ns=(n.s||[]).length;
+  el('rect',{x:f(p[0]-HW[i]),y:f(p[1]-HH[i]),width:f(HW[i]*2),height:f(HH[i]*2),rx:5},ng);
+  var y0=p[1]-ns*9.5,t=el('text',{x:f(p[0]),y:f(y0+1),'text-anchor':'middle','dominant-baseline':'middle','font-size':18},ng);t.textContent=n.t;
+  (n.s||[]).forEach(function(s,k){var u=el('text',{x:f(p[0]),y:f(y0+20+k*17),'text-anchor':'middle','dominant-baseline':'middle','font-size':12.5,'class':'s'},ng);u.textContent=s});
+  ng.addEventListener('click',function(){if(i!==A)set({cp:i,rot:0})});});}
+function frame(L){var P={},T={};for(var i=0;i<K;i++){if(i===L.c)P[i]=[0,0];else{T[i]=L.t[i];P[i]=pos(L.t[i])}}return {P:P,T:T}}
+function go(){var L1=layout(st),F1=frame(L1);cancelAnimationFrame(raf);
+ if(!cur||matchMedia('(prefers-reduced-motion: reduce)').matches){cur={L:L1,F:F1};draw(F1.P,F1.T,L1);return}
+ var L0=cur.L,F0=cur.F,t0=performance.now(),same=L0.c===L1.c;
+ (function step(now){var p=Math.min(1,(now-t0)/700),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,P={},T={};
+  for(var i=0;i<K;i++){if(F0.T[i]!=null&&F1.T[i]!=null){var d=F1.T[i]-F0.T[i];d=((d%1)+1.5)%1-.5;if(st.dir&&Math.abs(Math.abs(d)-.5)<1e-6)d=st.dir*.5;T[i]=F0.T[i]+d*e;P[i]=pos(T[i])}
+   else{P[i]=[F0.P[i][0]+(F1.P[i][0]-F0.P[i][0])*e,F0.P[i][1]+(F1.P[i][1]-F0.P[i][1])*e]}}
+  draw(P,T,L1,p>=1&&true||(same?true:false));
+  if(p<1)raf=requestAnimationFrame(step);else{cur={L:L1,F:F1};draw(F1.P,F1.T,L1)}})(t0);}
+var rows=[document.createElement('div'),document.createElement('div')];rows.forEach(function(r){r.className='cd-row';ctl.appendChild(r)});
+function btn(row,txt,fn,lab){var b=document.createElement('button');b.type='button';b.textContent=txt;if(lab)b.setAttribute('aria-label',lab);b.addEventListener('click',fn);row.appendChild(b);return b}
+function span(row,t){var s=document.createElement('span');s.textContent=t;row.appendChild(s)}
+span(rows[0],'Counterpart:');var CB={};o.order.forEach(function(i){if(i!==A)CB[i]=btn(rows[0],N[i].t,function(){set({cp:i,rot:0})})});
+span(rows[1],'Centre:');var MB={cp:btn(rows[1],'Counterpart',function(){set({mode:'cp',rot:0})}),agi:btn(rows[1],N[A].t,function(){set({mode:'agi',rot:0})})};
+span(rows[1],'Rotate:');btn(rows[1],'↺',function(){set({rot:st.rot-1,dir:-1})},'Rotate counter-clockwise');btn(rows[1],'↻',function(){set({rot:st.rot+1,dir:1})},'Rotate clockwise');
+function mark(){for(var i in CB)CB[i].setAttribute('aria-pressed',+i===st.cp?'true':'false');MB.cp.setAttribute('aria-pressed',st.mode==='cp'?'true':'false');MB.agi.setAttribute('aria-pressed',st.mode==='agi'?'true':'false')}
+function set(p){st.dir=0;for(var k in p)st[k]=p[k];mark();go()}
+function fit(){if(fitted||!svg.getBoundingClientRect().width)return;var keep={cp:st.cp,mode:st.mode,rot:st.rot},x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+ ['cp','agi'].forEach(function(md){o.order.forEach(function(i){if(i===A)return;var L=layout({cp:i,mode:md,rot:0}),F=frame(L);draw(F.P,F.T,L);var b=g.getBBox();x0=Math.min(x0,b.x);y0=Math.min(y0,b.y);x1=Math.max(x1,b.x+b.width);y1=Math.max(y1,b.y+b.height)})});
+ st.cp=keep.cp;st.mode=keep.mode;st.rot=keep.rot;draw(cur.F.P,cur.F.T,cur.L);svg.setAttribute('viewBox',f(x0-8)+' '+f(y0-8)+' '+f(x1-x0+16)+' '+f(y1-y0+16));fitted=1}
+mark();go();fit();window.addEventListener('hashchange',function(){setTimeout(fit,0)});}
+CDPN({svg:'cdSvg1',ctl:'cdCtl1',shape:'circle',R:275,agi:0,cp:1,mode:'agi',order:[0,1,2,3,4,5,6],
+ nodes:[{t:'AGI Labs',s:['teams + technologies'],c:'core'},{t:'Goldman · JPM',s:['fee 1–10% of raise']},{t:'Investors',s:['i €1m → €100b']},{t:'Compute cluster'},{t:'AWS'},{t:'NVIDIA'},{t:'Clients'}],
+ edges:[[0,1,'IPO mandate'],[1,2,'structures, places'],[2,3,'i',1],[3,2,'data-flow seat'],[4,3,'builds, runs'],[3,4,'c',1],[5,4,'first in queue'],[0,6,'sovereign models'],[6,3,'c for use',1],[3,0,'priority compute']]});
+CDPN({svg:'cdSvg2',ctl:'cdCtl2',shape:'rect',agi:4,cp:2,mode:'cp',order:[0,1,2,3,4,5],
+ nodes:[{t:'NVIDIA',s:['Rubin, B300']},{t:'AWS',s:['builds, operates']},{t:'GPU cluster',s:['€1m → €100b'],c:'k'},{t:'Clients',s:['Schwarz · Mercedes · BMW','Commerzbank · Deutsche Bank']},{t:'AGI Labs',s:['models + clients'],c:'agi'},{t:'Goldman · JPM',s:['GPU-backed debt, IPO']}],
+ edges:[[0,1,'first in queue'],[1,2,''],[2,1,'c',1],[5,2,'i',1],[2,5,'1–10%',1],[4,2,''],[2,4,'priority'],[4,5,'IPO mandate'],[2,3,'inside perimeter']]});
+(function(){
+var svg=document.getElementById('tvSvg'),ctl=document.getElementById('tvCtl');if(!svg)return;
+var NS='http://www.w3.org/2000/svg',W=1290,X0=84,X1=1000,NOW=2026.88,st={ci:1e6,r0:10e6,v0:30e6};
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e}
+function f(v){return (+v).toFixed(1)}
+function X(t){var P=X1-X0;return t<=2031?X0+(t-2026)/5*.4*P:X0+.4*P+(t-2031)/45*.6*P}
+function Tinv(x){var p=(x-X0)/(X1-X0);return p<=.4?2026+p/.4*5:2031+(p-.4)/.6*45}
+function fmt(v){if(v<1e9)return '€'+(+(v/1e6).toPrecision(3))+'m';if(v<1e12)return '€'+(+(v/1e9).toPrecision(3))+'b';var T=v/1e12;return '€'+(T<100?+T.toPrecision(3):Math.round(T).toLocaleString('en-US'))+'T'}
+function mono(A){for(var k=1;k<A.length;k++)A[k][1]=Math.max(A[k][1],A[k-1][1]*1.2);return A}
+function pchip(P){var n=P.length,x=P.map(function(p){return p[0]}),y=P.map(function(p){return Math.log10(p[1])}),h=[],d=[],m=[],i;
+ for(i=0;i<n-1;i++){h[i]=x[i+1]-x[i];d[i]=(y[i+1]-y[i])/h[i]}m[0]=d[0];m[n-1]=d[n-2];
+ for(i=1;i<n-1;i++){if(d[i-1]*d[i]<=0)m[i]=0;else{var w1=2*h[i]+h[i-1],w2=h[i]+2*h[i-1];m[i]=(w1+w2)/(w1/d[i-1]+w2/d[i])}}
+ return function(t){if(t<=x[0])return Math.pow(10,y[0]);if(t>=x[n-1])return Math.pow(10,y[n-1]);var j=0;while(t>x[j+1])j++;
+  var hh=h[j],s=(t-x[j])/hh,s2=s*s,s3=s2*s;return Math.pow(10,(2*s3-3*s2+1)*y[j]+(s3-2*s2+s)*hh*m[j]+(-2*s3+3*s2)*y[j+1]+(s3-s2)*hh*m[j+1])}}
+function model(){var ci=st.ci,r0=st.r0,v0=st.v0;
+ var F=pchip(mono([[2027,ci],[2028,1e9],[2030,2e10],[2035,5e11],[2046,2e13],[2060,5e14],[2076,1e16]]));
+ var cR=function(t){return .35*F(t-.75)},cV=function(t){return Math.max(1.25*F(t),10*cR(t))};
+ var aV=pchip(mono([[NOW,v0],[2027.25,Math.max(1.5e8,v0*4)],[2027.9,1.5e9],[2028.5,1.5e10],[2029.25,2e11],[2030,2e12],[2031,7e12],[2033,2.5e13],[2035,6e13],[2046,1.8e15],[2060,2e16],[2076,1e17]]));
+ var rs=r0>0?[[NOW,r0]]:[[2027.25,1e6]];
+ var aR=pchip(mono(rs.concat([[2027.5,Math.max(5e7,r0*3)],[2028,5e8],[2029,5e9],[2030,5e10],[2033,1e12],[2038,2e13],[2046,1.79e14],[2060,1.5e15],[2076,1e16]])));
+ var aF=pchip(mono([[2027.25,3e7],[2027.9,3e8],[2028.5,3e9],[2029.5,3e10],[2031,1.5e11],[2040,1e12],[2076,1e13]]));
+ return [
+  {k:'v',e:'AGI',tag:'v',lab:'valuation',fn:aV,t0:NOW},
+  {k:'i',e:'AGI',tag:'i',lab:'funding total',fn:aF,t0:2027.25},
+  {k:'c',e:'AGI',tag:'c',lab:'revenue',fn:aR,t0:rs[0][0]},
+  {k:'v',e:'Compute (SPV)',tag:'v',lab:'valuation',fn:cV,t0:2027,cmp:1},
+  {k:'i',e:'Compute (SPV)',tag:'i',lab:'funding total',fn:F,t0:2027,cmp:1},
+  {k:'c',e:'Compute (SPV)',tag:'c',lab:'revenue',fn:cR,t0:2027.5,cmp:1}]}
+var MS=[['AGI',[[2027.25,'Seed'],[2027.9,'Series A'],[2028.25,'Self-improving core'],[2029.5,'Brains: auto · aero · robotics'],[2031,'IPO Nasdaq · dual-class ×20'],[2033,'Common brain'],[2035,'ASI'],[2045,'Secure safe singularity']]],
+ ['Compute (SPV)',[[2027,'SPV funded'],[2027.3,'Pilot node live'],[2027.6,'First offtake'],[2028.5,'€1b+ GPU-backed debt'],[2032,'1 GW'],[2040,'Space compute'],[2050,'Compute ×100 efficiency']]]];
+var g=el('g',{},svg),PT,PB,PH;
+function draw(){g.textContent='';var y=6;
+ MS.forEach(function(L,li){el('text',{x:4,y:y+10,'class':'tv-lane'},g).textContent=L[0];var rows=[],items=[];
+  L[1].forEach(function(m){var x=X(m[0]),w=m[1].length*6.4+14,r=0;while(rows[r]!=null&&rows[r]>x-6)r++;rows[r]=x+w;items.push([x,r,m[1]])});
+  items.forEach(function(it){var yy=y+8+it[1]*16,d=4;el('path',{d:'M'+f(it[0])+' '+f(yy-d)+'l'+d+' '+d+'l-'+d+' '+d+'l-'+d+' -'+d+'z','class':'tv-ms'+(li?' cmp':'')},g);
+   el('text',{x:f(it[0]+8),y:f(yy),'dominant-baseline':'middle','class':'tv-mt'},g).textContent=it[2]});
+  y+=8+rows.length*16+6});
+ PT=y+16;PH=420;PB=PT+PH;svg.setAttribute('viewBox','0 0 '+W+' '+(PB+44));
+ function Y(v){return PB-(Math.log10(v)-6)/11*PH}
+ for(var d=6;d<=17;d++){var yy=Y(Math.pow(10,d));el('line',{x1:X0,x2:X1,y1:f(yy),y2:f(yy),'class':'tv-grid'+(d%3===0?' maj':'')},g);
+  el('text',{x:X0-8,y:f(yy),'text-anchor':'end','dominant-baseline':'middle','class':'tv-ax'},g).textContent=fmt(Math.pow(10,d))}
+ for(var q=2026;q<=2031;q+=.25){var xx=X(q),yr=q%1===0;el('line',{x1:f(xx),x2:f(xx),y1:PB,y2:PB+(yr?6:3),'class':'tv-tick'},g);
+  if(yr){el('line',{x1:f(xx),x2:f(xx),y1:PT,y2:PB,'class':'tv-grid'},g);el('text',{x:f(xx),y:PB+18,'text-anchor':'middle','class':'tv-ax'},g).textContent=q}
+  else el('text',{x:f(xx),y:PB+30,'text-anchor':'middle','class':'tv-q'},g).textContent='Q'+(Math.round((q%1)*4)+1)}
+ [2035,2040,2045,2050,2055,2060,2065,2070,2076].forEach(function(yr){var xx=X(yr);el('line',{x1:f(xx),x2:f(xx),y1:PT,y2:PB,'class':'tv-grid'},g);el('line',{x1:f(xx),x2:f(xx),y1:PB,y2:PB+6,'class':'tv-tick'},g);
+  el('text',{x:f(xx),y:PB+18,'text-anchor':'middle','class':'tv-ax'},g).textContent=yr});
+ el('text',{x:f(X(2031)+6),y:PB+30,'class':'tv-q'},g).textContent='quarters ← → years';
+ el('line',{x1:X0,x2:X1,y1:PB,y2:PB,'class':'tv-base'},g);
+ var S=model(),ends=[];
+ S.forEach(function(s){var dd='',t=s.t0;while(t<=2076.001){var v=s.fn(t);if(v>=1e6)dd+=(dd?'L':'M')+f(X(t))+' '+f(Y(Math.min(1e17,v)));t+=t<2031?.05:.25}
+  el('path',{d:dd,'class':'tv-l tv-'+s.k+(s.cmp?' cmp':'')},g);var v2=s.fn(2076);ends.push({y:Y(v2),s:s,v:v2})});
+ ends.sort(function(a,b){return a.y-b.y});for(var k=1;k<ends.length;k++)if(ends[k].y<ends[k-1].y+15)ends[k].y=ends[k-1].y+15;
+ ends.forEach(function(e){el('text',{x:X1+8,y:f(e.y),'dominant-baseline':'middle','class':'tv-end tv-'+e.s.k},g).textContent=e.s.e+' · '+e.s.tag+' '+fmt(e.v)});
+ var xn=X(NOW);el('line',{x1:f(xn),x2:f(xn),y1:PT-6,y2:PB,'class':'tv-now'},g);el('text',{x:f(xn+5),y:PT-2,'class':'tv-nowt'},g).textContent='Now';
+ el('circle',{cx:f(xn),cy:PB,r:4,'class':'tv-pulse'},g);
+ var hov=el('g',{'class':'tv-hov',visibility:'hidden'},g),gl=el('line',{y1:PT,y2:PB,'class':'tv-guide'},hov),bx=el('rect',{width:212,height:122,rx:5,'class':'tv-tip'},hov),tt=[];
+ for(var r=0;r<7;r++)tt.push(el('text',{'class':r?'tv-tt':'tv-tt h','dominant-baseline':'middle'},hov));
+ var hit=el('rect',{x:X0,y:PT,width:X1-X0,height:PH,fill:'transparent'},g);
+ function mv(ev){var pt=svg.createSVGPoint();pt.x=ev.clientX;pt.y=ev.clientY;var p=pt.matrixTransform(svg.getScreenCTM().inverse()),t=Math.max(NOW,Math.min(2076,Tinv(p.x))),xx=X(t);
+  hov.setAttribute('visibility','visible');gl.setAttribute('x1',f(xx));gl.setAttribute('x2',f(xx));var bxX=xx+222>X1+190?xx-222:xx+10,bxY=PT+8;bx.setAttribute('x',f(bxX));bx.setAttribute('y',bxY);
+  var lab=t<2031?Math.floor(t)+' Q'+(Math.floor((t%1)*4)+1):String(Math.round(t));tt[0].textContent=lab;
+  S.forEach(function(s,i){tt[i+1].textContent=(s.cmp?'SPV ':'AGI ')+s.tag+'  '+(t>=s.t0?fmt(s.fn(t)):'—');tt[i+1].setAttribute('class','tv-tt tv-'+s.k)});
+  tt.forEach(function(x,i){x.setAttribute('x',f(bxX+10));x.setAttribute('y',f(bxY+14+i*16))})}
+ hit.addEventListener('pointermove',mv);hit.addEventListener('pointerdown',mv);hit.addEventListener('pointerleave',function(){hov.setAttribute('visibility','hidden')});}
+var rows=[document.createElement('div'),document.createElement('div'),document.createElement('div')];rows.forEach(function(r){r.className='cd-row';ctl.appendChild(r)});
+function group(row,lab,key,vals,txt){var s=document.createElement('span');s.textContent=lab;row.appendChild(s);var bs=vals.map(function(v,i){var b=document.createElement('button');b.type='button';b.textContent=txt[i];
+ b.addEventListener('click',function(){st[key]=v;mark();draw()});row.appendChild(b);return [b,v]});groups.push([key,bs])}
+var groups=[];
+group(rows[0],'Compute (SPV) funding Q1 2027:','ci',[1e6,1e7,1e8,1e9],['i €1m','i €10m','i €100m','i €1b']);
+group(rows[1],'AGI revenue 2026:','r0',[0,1e6,1e7],['c 0','c €1m','c €10m']);
+group(rows[2],'AGI valuation 2026:','v0',[1e6,5e6,1e7,1.5e7,2e7,2.5e7,3e7],['v €1m','€5m','€10m','€15m','€20m','€25m','€30m']);
+function mark(){groups.forEach(function(gp){gp[1].forEach(function(b){b[0].setAttribute('aria-pressed',st[gp[0]]===b[1]?'true':'false')})})}
+mark();draw();})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+(function(){if(!window.Chart)return;
+var Y=['27','28','30','33','36','41','46'];
+var cs=getComputedStyle(document.documentElement);function tok(n){return cs.getPropertyValue(n).trim()}
+var acc=tok('--accent'),mute=tok('--mute'),rule=tok('--rule'),ink=tok('--ink'),alert=tok('--alert');
+function money(b){if(b>=1000)return '$'+(+(b/1000).toPrecision(3)).toLocaleString('en')+'T';if(b>=1)return '$'+(+b.toPrecision(3))+'b';return '$'+Math.round(b*1000)+'m'}
+function pct(v){return (v>=1?+v.toPrecision(3):+v.toPrecision(2))+'%'}
+function mk(id,base,max,fmt,refs,ymin,ymax){var el=document.getElementById(id);if(!el)return;
+var refPl={id:'refs',afterDatasetsDraw:function(c){if(!refs)return;var x=c.chartArea,y=c.scales.y,ctx=c.ctx;ctx.save();ctx.font='10px IBM Plex Mono,monospace';ctx.textBaseline='bottom';
+refs.forEach(function(r){var py=y.getPixelForValue(r[1]);ctx.strokeStyle=alert;ctx.lineWidth=.8;ctx.setLineDash([3,3]);ctx.beginPath();ctx.moveTo(x.left,py);ctx.lineTo(x.right,py);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=alert;ctx.fillText(r[0],x.left+3,py-1)});ctx.restore()}};
+var ch=new Chart(el,{type:'line',data:{labels:Y,datasets:[
+{label:'Base',data:base,borderColor:acc,backgroundColor:acc+'cc',fill:'start',borderWidth:1.2,pointRadius:0,tension:.3},
+{label:'Max',data:max,borderColor:acc,backgroundColor:acc+'40',fill:'-1',borderWidth:1,borderDash:[4,3],pointRadius:0,tension:.3}]},
+plugins:[refPl],options:{responsive:true,maintainAspectRatio:false,animation:{duration:1800,easing:'easeOutCubic'},interaction:{mode:'index',intersect:false},
+plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.dataset.label+' '+fmt(c.parsed.y)}}}},
+scales:{x:{grid:{display:false},ticks:{color:mute,font:{size:10},callback:function(v,i){return "'"+Y[i]}}},
+y:{type:'logarithmic',min:ymin,max:ymax,grid:{color:rule,lineWidth:.5},ticks:{color:mute,font:{size:10},autoSkip:true,maxTicksLimit:6,callback:function(v){var l=Math.log10(v);return Math.abs(l-Math.round(l))<1e-9?fmt(v):''}}}}}});
+setInterval(function(){if(el.offsetParent===null)return;ch.reset();ch.update()},2800);}
+mk('fcRev',[0.02,0.3,3,50,700,5500,27000],[0.1,2,50,1000,10000,50000,179000],money,null,0.01,1e6);
+mk('fcVal',[0.5,10,90,1000,10000,66000,270000],[5,100,2000,25000,200000,750000,1800000],money,[['Nvidia ≈$4–5T',4500],['OpenAI ≈$0.5–1T',750],['Anthropic ≈$0.3–0.6T',400]],0.1,1e7);
+mk('fcSh',[0.0003,0.004,0.02,0.16,1,5,15],[0.002,0.02,0.35,3.2,14.5,45,100],pct,null,0.0001,100);
+})();
+</script>
+</div>
+
+</body>
+</html>
