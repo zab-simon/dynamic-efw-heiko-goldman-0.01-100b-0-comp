@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Hyperscaler</title>
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* One screen, two zones: thesis left, evidence + entry right; stacks on portrait */
+:root{
+  --bg:#F2F4F7; --panel:#FFFFFF; --ink:#0E1A2B; --mute:#5A6577; --rule:#D5DBE3;
+  --accent:#1F4FD8; --alert:#C8203A; --on-accent:#FFFFFF; --tv-v:#1F4FD8; --tv-i:#A86A00; --tv-c:#11834F;
+  --f-disp:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A111D; --panel:#111B2B; --ink:#E7ECF3; --mute:#97A3B6; --rule:#243247;
+  --accent:#7C97FF; --alert:#FF5C72; --on-accent:#0A111D; --tv-v:#7C97FF; --tv-i:#F0B43C; --tv-c:#43D18C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A111D; --panel:#111B2B; --ink:#E7ECF3; --mute:#97A3B6; --rule:#243247;
+  --accent:#7C97FF; --alert:#FF5C72; --on-accent:#0A111D; --tv-v:#7C97FF; --tv-i:#F0B43C; --tv-c:#43D18C; color-scheme:dark}
+
+html{height:100%;font-size:clamp(10px,calc(0.5vw + 0.85vh),16.5px)}
+body{height:100%;background:var(--bg);color:var(--ink);font-family:var(--f-body);overflow:hidden}
+@media (max-height:540px){body{overflow:auto}}
+.deck{height:100%;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto auto;gap:1.1rem;
+  padding-block:1rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  max-width:1400px;margin:0 auto}
+@media (max-height:540px){.deck{height:auto}}
+
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;
+  border-bottom:1px solid var(--rule);padding-bottom:.6rem}
+.brand{font-family:var(--f-disp);font-weight:600;font-size:1.2rem;letter-spacing:.01em}
+.brand span{color:var(--mute);font-weight:500}
+.meta{font-family:var(--f-mono);font-size:.78rem;color:var(--mute);letter-spacing:.04em}
+
+main{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.4rem;min-height:0}
+@media (max-aspect-ratio:1/1){main{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:1rem}}
+
+.thesis{display:flex;flex-direction:column;gap:1.05rem;min-width:0;min-height:0}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;color:var(--accent)}
+h1{font-family:var(--f-disp);font-weight:600;font-size:clamp(2.2rem,3.4rem,3.6rem);line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.lede{font-size:1.12rem;line-height:1.42;color:var(--ink);margin:0;max-width:58ch}
+.rows{display:grid;gap:.75rem}
+.row{display:grid;grid-template-columns:7.2rem minmax(0,1fr);gap:.9rem;padding-top:.7rem;border-top:1px solid var(--rule)}
+.row h2{font-family:var(--f-mono);font-weight:500;font-size:.78rem;letter-spacing:.06em;color:var(--mute);margin:0;padding-top:.12rem}
+.row p{margin:0;font-size:.98rem;line-height:1.4}
+.row b{font-weight:600}
+
+.evidence{display:flex;flex-direction:column;gap:1rem;min-width:0;min-height:0}
+.chart{flex:1;min-height:0;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:.8rem .9rem .6rem}
+.chart .cap{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;font-family:var(--f-mono);font-size:.74rem;color:var(--mute)}
+.chart .cap b{color:var(--ink);font-weight:500}
+.chart{justify-content:center;gap:1rem}
+.big{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap}
+.big b{font-family:var(--f-disp);font-weight:600;font-size:3rem;line-height:1;color:var(--alert);font-variant-numeric:tabular-nums}
+.big span{font-size:.9rem;color:var(--mute);line-height:1.35;flex:1;min-width:12rem}
+.tl{display:grid;gap:.7rem}
+.tl-row{display:grid;grid-template-columns:5.2rem minmax(0,1fr);align-items:center;gap:.6rem}
+.tl-lbl{font-family:var(--f-disp);font-weight:600;font-size:1rem}
+.tl-lbl.acc{color:var(--accent)}
+.tl-track{position:relative;height:2.6rem}
+.tl-quiet{position:absolute;left:0;width:60%;top:.55rem;height:2px;background:var(--rule)}
+.tl-red{position:absolute;left:60%;width:40%;top:.1rem;height:1rem;background:var(--alert);border-radius:2px}
+.tl-blue{position:absolute;left:0;width:60%;top:.1rem;height:1rem;background:var(--accent);border-radius:2px}
+.tl-note{position:absolute;top:1.35rem;font-size:.82rem;line-height:1.2;white-space:nowrap}
+.tl-note.r{right:0;color:var(--alert)}
+.tl-note.b{left:0;color:var(--accent)}
+.tl-axis{position:relative;height:1.3rem;border-top:1px solid var(--rule);font-family:var(--f-mono);font-size:.72rem;color:var(--mute)}
+.tl-axis span{position:absolute;top:.3rem;white-space:nowrap}
+
+.entry h2{font-family:var(--f-mono);font-weight:500;font-size:.78rem;letter-spacing:.06em;color:var(--mute);margin:0 0 .5rem}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+.tile{border-top:2px solid var(--accent);padding-top:.5rem;display:flex;flex-direction:column;gap:.25rem}
+.tile h3{font-family:var(--f-disp);font-weight:600;font-size:1.05rem;margin:0}
+.tile p{margin:0;font-size:.86rem;line-height:1.35;color:var(--mute)}
+.tile .n{font-family:var(--f-mono);font-size:.84rem;color:var(--ink);font-variant-numeric:tabular-nums}
+
+.live{font-family:var(--f-mono);font-size:.8rem;color:var(--mute);font-variant-numeric:tabular-nums}
+.live b{color:var(--alert);font-weight:500}
+.tl-red{transform-origin:left center;animation:loopred 2.5s cubic-bezier(.3,.7,.3,1) infinite}
+.tl-blue{transform-origin:left center;animation:loopblue 2.5s ease-out infinite}
+@keyframes loopblue{0%{transform:scaleX(0)}15%{transform:scaleX(1)}92%{transform:scaleX(1)}100%{transform:scaleX(1)}}
+@keyframes loopred{0%,18%{transform:scaleX(0)}55%{transform:scaleX(1)}92%{transform:scaleX(1)}100%{transform:scaleX(1)}}
+.tl-blue::after{content:"";position:absolute;left:-.35rem;top:.15rem;width:.7rem;height:.7rem;border-radius:50%;background:var(--accent);animation:pulse 1.2s ease-out infinite}
+.tile{animation:glow 2.4s ease-in-out infinite}
+.tile:nth-child(2){animation-delay:.8s}.tile:nth-child(3){animation-delay:1.6s}
+@keyframes glow{0%,100%{border-top-color:var(--accent);border-top-width:2px}10%,25%{border-top-color:var(--alert);border-top-width:4px}35%{border-top-color:var(--accent);border-top-width:2px}}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent)}70%{box-shadow:0 0 0 .7rem transparent}100%{box-shadow:0 0 0 0 transparent}}
+@keyframes rise{from{opacity:.2;transform:translateY(.4rem)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.tl-red,.tl-blue,.tl-blue::after,.tile{animation:none}}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:.5rem 1.4rem;flex-wrap:wrap;background:var(--accent);color:var(--on-accent);border-radius:6px;padding:.7rem 1rem}
+.cta-msg{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.cta-msg b{font-family:var(--f-disp);font-weight:600;font-size:1.15rem;line-height:1.2}
+.cta-msg span{font-size:.82rem;opacity:.85}
+.cta-contact{display:flex;gap:1rem;flex-wrap:wrap;font-family:var(--f-mono);font-size:.84rem}
+.cta-contact span{user-select:all}
+.offer{display:flex;flex-wrap:wrap;gap:.25rem 1rem;margin-top:.6rem;font-size:.82rem;color:var(--mute)}
+.offer b{color:var(--alert);font-weight:600}
+.offer span::before{content:"· ";color:var(--rule)}
+main.commit{display:flex;flex-direction:column;gap:1.2rem;justify-content:center}
+.terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media (max-aspect-ratio:1/1){.terms{grid-template-columns:minmax(0,1fr);gap:.6rem}}
+.term{background:var(--panel);border:1px solid var(--rule);border-top:3px solid var(--accent);border-radius:6px;padding:.9rem 1rem;display:flex;flex-direction:column;gap:.4rem;min-width:0}
+.term h3{font-family:var(--f-disp);font-weight:600;font-size:1.3rem;margin:0}
+.term .amt{font-family:var(--f-mono);font-size:1.15rem;color:var(--alert);font-variant-numeric:tabular-nums}
+.term ul{margin:0;padding-left:1.1rem;display:grid;gap:.2rem;font-size:.92rem;line-height:1.35}
+.term:nth-child(1){animation:glow 2.4s ease-in-out infinite}.term:nth-child(2){animation:glow 2.4s ease-in-out .8s infinite}.term:nth-child(3){animation:glow 2.4s ease-in-out 1.6s infinite}
+.plan{display:grid;gap:.4rem}
+.plan-bar{height:4px;background:var(--rule);border-radius:2px;overflow:hidden}
+.plan-fill{height:100%;background:var(--accent);transform-origin:left center;animation:loopblue 2.5s ease-out infinite}
+.plan-steps{display:flex;justify-content:space-between;gap:.5rem;font-family:var(--f-mono);font-size:.76rem;color:var(--mute)}
+.plan-steps span{display:flex;flex-direction:column}
+.plan-steps span:last-child{text-align:right}
+.plan-steps b{color:var(--ink);font-weight:500}
+@media (prefers-reduced-motion:reduce){.term,.plan-fill{animation:none}}
+.flow{display:flex;flex-direction:column;gap:.25rem}
+.fn{display:flex;flex-direction:column;gap:.1rem;border:1px solid var(--rule);background:var(--panel);border-radius:6px;padding:.45rem .8rem}
+.fn b{font-family:var(--f-disp);font-weight:600;font-size:1.05rem}
+.fn span{font-size:.84rem;color:var(--mute)}
+.fn.acc{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.fa{text-align:center;color:var(--accent);font-size:.9rem;line-height:1;animation:drop 1.2s ease-in-out infinite}
+.fa:nth-of-type(2){animation-delay:.3s}.fa:nth-of-type(3){animation-delay:.6s}
+@keyframes drop{0%,100%{transform:translateY(-2px);opacity:.5}50%{transform:translateY(2px);opacity:1}}
+.fo{display:flex;flex-wrap:wrap;gap:.35rem}
+.fo i,.uni i{font-style:normal;font-family:var(--f-mono);font-size:.78rem;padding:.3rem .6rem;border-radius:3px;background:var(--panel);border:1px solid var(--rule)}
+.fo i{border-color:var(--accent);color:var(--accent)}
+.uni{display:flex;flex-wrap:wrap;gap:.35rem}
+.uni i.slot{border:1px dashed var(--accent);color:var(--accent);background:transparent;animation:slot 1.4s ease-in-out infinite}
+.share{gap:.6rem;justify-content:center}
+.sb{display:grid;grid-template-columns:4.6rem minmax(0,1fr) 3rem;align-items:center;gap:.5rem}
+.sb-l{font-family:var(--f-mono);font-size:.76rem;color:var(--mute)}
+.sb-t{position:relative;height:.9rem;background:var(--bg);border-radius:2px}
+.sb-base{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:2px 0 0 2px}
+.sb-up{position:absolute;top:0;bottom:0;background:color-mix(in srgb,var(--accent) 35%,transparent);transform-origin:left center;animation:loopblue 2.5s ease-out infinite}
+.sb-v{font-family:var(--f-mono);font-size:.8rem;text-align:right;font-variant-numeric:tabular-nums}
+.sb-v.up{color:var(--accent);font-weight:500}
+@media (prefers-reduced-motion:reduce){.fa,.sb-up{animation:none}}
+main.fc{display:flex;flex-direction:column;gap:.9rem;min-height:0}
+.fc-keys{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-family:var(--f-mono);font-size:.76rem;color:var(--mute)}
+.fc-keys span{display:flex;align-items:center;gap:.35rem}
+.fc-keys i{display:inline-block;width:.9rem;height:.5rem;border-radius:1px}
+.k-max{background:color-mix(in srgb,var(--accent) 30%,transparent)}
+.k-base{background:var(--accent)}
+.fc-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.9rem}
+@media (max-aspect-ratio:1/1){.fc-grid{grid-template-columns:minmax(0,1fr)}}
+.fc-c{padding:.6rem .7rem .4rem;gap:.3rem}
+.fc-cv{position:relative;flex:1;min-height:6rem}
+.ladder{display:grid;gap:.6rem}
+.ld{display:grid;grid-template-columns:4rem minmax(0,1fr) 6rem;align-items:center;gap:.6rem}
+.ld-l{font-family:var(--f-mono);font-size:.82rem;font-variant-numeric:tabular-nums}
+.ld-t{position:relative;height:.9rem;background:var(--bg);border-radius:2px;overflow:hidden}
+.ld-f{position:absolute;top:0;bottom:0;left:0;background:var(--accent);transform-origin:left center;animation:loopblue 2.5s ease-out infinite}
+.ld:nth-child(2) .ld-f{animation-delay:.2s}.ld:nth-child(3) .ld-f{animation-delay:.4s}.ld:nth-child(4) .ld-f{animation-delay:.6s}
+.ld-v{font-family:var(--f-mono);font-size:.74rem;color:var(--mute);text-align:right;white-space:nowrap}
+main.loi{display:flex;justify-content:center;min-height:0;overflow:auto}
+.loi-doc{width:100%;max-width:64rem;box-sizing:border-box;background:var(--panel);border:1px solid var(--rule);border-radius:6px;padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.75rem}
+.loi-h{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:.5rem}
+.loi-h h1{font-size:1.7rem}
+.loi-h span{font-family:var(--f-mono);font-size:.74rem;color:var(--alert);letter-spacing:.06em}
+.loi-parties{margin:0;font-size:.92rem;line-height:1.45}
+.loi-cl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem 1.6rem}
+@media (max-aspect-ratio:1/1){.loi-cl{grid-template-columns:minmax(0,1fr)}}
+.cl{min-width:0}
+.cl h3{font-family:var(--f-mono);font-weight:500;font-size:.74rem;letter-spacing:.06em;color:var(--mute);margin:0 0 .25rem}
+.cl p{margin:0;font-size:.88rem;line-height:1.45}
+.cl label{display:flex;gap:.45rem;align-items:baseline;flex-wrap:wrap;font-size:.88rem;line-height:1.6}
+.cl input{accent-color:var(--accent)}
+.fill{display:inline-block;min-width:2.2rem;border-bottom:1px dashed var(--accent);color:var(--accent);padding:0 .15rem;outline:none}
+.fill:focus{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.sig{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.6rem;padding-top:1.8rem}
+.sig div{border-top:1px solid var(--ink);padding-top:.3rem;font-size:.8rem;color:var(--mute)}
+.sig b{display:block;color:var(--ink);font-weight:500}
+.sig div.here{border-top:2px dashed var(--accent);color:var(--accent);animation:slot 1.4s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.ld-f,.sig div.here{animation:none}}
+main.cdpn{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto auto;gap:.5rem}
+.cd-h h1{font-size:clamp(1.6rem,2.8rem,3rem)}
+.cd-fig{margin:0;min-height:0;background:var(--panel);border:1px solid var(--rule);border-radius:6px;display:flex;padding:.3rem}
+.cd-fig svg{width:100%;height:100%;display:block}
+.cd-rot{display:grid;gap:.3rem}.cd-row{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}.cd-rot{font-family:var(--f-mono);font-size:.72rem;color:var(--mute)}
+.cd-rot button{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:.2rem .5rem;cursor:pointer}
+.cd-rot button[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.cd-ring{fill:none;stroke:var(--rule);stroke-width:1}
+.cd-e{fill:none;stroke:var(--mute);stroke-width:1.2;stroke-dasharray:6 5;animation:cdflow 1.2s linear infinite}
+.cd-e.m{stroke:var(--accent)}
+.cd-ah{fill:var(--mute)}.cd-ah.m{fill:var(--accent)}
+@keyframes cdflow{to{stroke-dashoffset:-22}}
+@media (prefers-reduced-motion:reduce){.cd-e{animation:none}}
+.cd-l{font-family:var(--f-mono);fill:var(--mute);paint-order:stroke;stroke:var(--panel);stroke-width:4px;stroke-linejoin:round}
+.cd-l.m{fill:var(--accent)}
+.cd-n{cursor:pointer}
+.cd-n rect{fill:var(--panel);stroke:var(--ink);stroke-width:1}
+.cd-n.core rect{fill:var(--accent);stroke:var(--accent)}
+.cd-n text{font-family:var(--f-disp);font-weight:600;fill:var(--ink)}
+.cd-n text.s{font-family:var(--f-mono);font-weight:400;fill:var(--mute)}
+.cd-n.core text,.cd-n.core text.s{fill:var(--on-accent)}
+.cd-n.agi rect{fill:color-mix(in srgb,var(--alert) 9%,var(--panel));stroke:var(--alert)}.cd-n.agi text,.cd-n.agi text.s{fill:var(--alert)}
+.cd-n.k rect{fill:color-mix(in srgb,var(--accent) 10%,var(--panel));stroke:var(--accent)}.cd-n.k text,.cd-n.k text.s{fill:var(--accent)}
+.cd-n.ctr rect,.cd-n.cp rect{stroke-width:2.6}
+.c2-b{fill:var(--panel);stroke:var(--mute);stroke-width:1}
+.c2-k{fill:color-mix(in srgb,var(--accent) 10%,var(--panel));stroke:var(--accent);stroke-width:1}
+.c2-a{fill:color-mix(in srgb,var(--alert) 9%,var(--panel));stroke:var(--alert);stroke-width:1}
+.c2-p{fill:none;stroke:var(--mute);stroke-width:1;stroke-dasharray:8 6}
+.c2-t{font-family:var(--f-disp);font-weight:600;font-size:23px;fill:var(--ink)}
+.c2-t.k{fill:var(--accent)}.c2-t.a{fill:var(--alert)}
+.c2-s{font-family:var(--f-body);font-size:17px;fill:var(--mute)}
+.c2-s.k{fill:var(--accent)}.c2-s.a{fill:var(--alert)}
+.c2-leg{font-family:var(--f-mono);font-size:.72rem;color:var(--mute)}
+.tlv-h{display:grid;gap:.2rem;min-width:0}
+.tlv-h h1{font-size:clamp(1.6rem,2.8rem,3rem)}
+.tlv-sub{font-family:var(--f-mono);font-size:.74rem;color:var(--mute);min-width:0;overflow-wrap:anywhere}
+.tv-lane{font-family:var(--f-mono);font-size:11px;fill:var(--ink);font-weight:500}
+.tv-mt{font-family:var(--f-mono);font-size:11px;fill:var(--mute)}
+.tv-ms{fill:var(--ink)}.tv-ms.cmp{fill:var(--panel);stroke:var(--ink);stroke-width:1}
+.tv-grid{stroke:var(--rule);stroke-width:.5}.tv-grid.maj{stroke-width:1}
+.tv-base,.tv-tick{stroke:var(--mute);stroke-width:.8}
+.tv-ax{font-family:var(--f-mono);font-size:11px;fill:var(--mute)}
+.tv-q{font-family:var(--f-mono);font-size:9px;fill:var(--mute)}
+.tv-l{fill:none;stroke-width:1.7}.tv-l.cmp{stroke-width:1.2;stroke-dasharray:6 4;animation:tvflow 1.4s linear infinite}
+.tv-v{stroke:var(--tv-v);fill:var(--tv-v)}.tv-i{stroke:var(--tv-i);fill:var(--tv-i)}.tv-c{stroke:var(--tv-c);fill:var(--tv-c)}
+.tv-l.tv-v,.tv-l.tv-i,.tv-l.tv-c{fill:none}
+.tv-end{font-family:var(--f-mono);font-size:11.5px;stroke:none}
+.tv-now{stroke:var(--alert);stroke-width:1;stroke-dasharray:3 3}
+.tv-nowt{font-family:var(--f-mono);font-size:11px;fill:var(--alert)}
+.tv-pulse{fill:var(--alert);transform-box:fill-box;transform-origin:center;animation:tvpulse 2s ease-in-out infinite}
+.tv-guide{stroke:var(--ink);stroke-width:.6}
+.tv-tip{fill:var(--panel);stroke:var(--rule)}
+.tv-tt{font-family:var(--f-mono);font-size:11px;stroke:none;fill:var(--ink)}.tv-tt.h{font-weight:600}
+@keyframes tvflow{to{stroke-dashoffset:-20}}
+@keyframes tvpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.8);opacity:.35}}
+@media (prefers-reduced-motion:reduce){.tv-l.cmp,.tv-pulse{animation:none}}
+.mc-wrap{margin:0;min-height:0;display:flex}
+.mc-wrap svg{width:100%;height:100%;display:block}
+.mc-paper{fill:#FFFFFF;stroke:#D9DDE3}
+.mc-b{fill:#FFFFFF;stroke:#10151F;stroke-width:1}.mc-b.bank{stroke:#1F4FD8;stroke-width:1.4}.mc-b.agi{fill:#FBEFF1;stroke:#C8203A}.mc-b.core{fill:#EEF2FD;stroke:#1F4FD8}
+.mc-t{font-family:var(--f-disp);font-weight:600;font-size:16px;fill:#10151F}.mc-t2{font-family:var(--f-disp);font-weight:500;font-size:14px;fill:#10151F}
+.mc-s{font-family:var(--f-mono);font-size:11px;fill:#5B6472}.mc-s2{font-family:var(--f-mono);font-size:12px;fill:#10151F}
+.mc-g{font-family:var(--f-disp);font-weight:600;font-size:14px;fill:#10151F}
+.mc-l{font-family:var(--f-mono);font-size:11px;fill:#10151F;paint-order:stroke;stroke:#FFFFFF;stroke-width:4px;stroke-linejoin:round}
+.mc-l.blue,.mc-v.blue{fill:#1F4FD8}.mc-l.amber,.mc-v.amber{fill:#A86A00}.mc-l.green,.mc-v.green{fill:#11834F}.mc-l.red{fill:#C8203A}.mc-l.mute{fill:#8A93A0}
+.mc-x{font-family:var(--f-mono);font-size:14px;font-weight:700;fill:#C8203A}
+.mc-a{fill:none;stroke-width:1.3}.mc-a.ink{stroke:#10151F}.mc-a.blue{stroke:#1F4FD8}.mc-a.amber{stroke:#A86A00}.mc-a.red{stroke:#C8203A}.mc-a.green{stroke:#11834F}.mc-a.gray{stroke:#8A93A0}
+.mc-a.ds{stroke-dasharray:4 3}.mc-a.fl{stroke-dasharray:6 4;animation:tvflow 1.2s linear infinite}
+.mk.ink{fill:#10151F}.mk.blue{fill:#1F4FD8}.mk.amber{fill:#A86A00}.mk.red{fill:#C8203A}.mk.green{fill:#11834F}.mk.gray{fill:#8A93A0}
+.mc-ring{fill:none;stroke:#10151F}.mc-ring.r0{stroke-width:1.6}.mc-ring.r1{stroke-width:1.1;stroke-dasharray:5 3}.mc-ring.r2{stroke-width:.8}
+.mc-chip{fill:#10151F}.mc-pin{stroke:#10151F;stroke-width:1.4}.mc-chipt{font-family:var(--f-mono);font-size:10px;font-weight:600;fill:#FFFFFF}
+.atk{animation:mcatk 1.6s ease-in-out infinite}
+@keyframes mcatk{0%,100%{opacity:.25}50%{opacity:1}}
+.mc-cn{fill:#F6F7F9;stroke:#8A93A0;stroke-dasharray:5 3}.mc-de{fill:#F3F9F5;stroke:#11834F}
+.mc-grid{stroke:#E6E9ED;stroke-width:.8}.mc-ax{font-family:var(--f-mono);font-size:10.5px;fill:#5B6472}
+.mc-bar{stroke-width:5;stroke-linecap:butt}.mc-bar.i0{stroke:#1F4FD8}.mc-bar.i1{stroke:#A9BCF2}.mc-bar.f0{stroke:#A86A00;stroke-width:3}.mc-bar.f1{stroke:#E8CC94;stroke-width:3}
+.mc-v{font-family:var(--f-mono);font-size:10.5px;fill:#10151F}.mc-v.b{font-weight:600;font-size:12px}
+.mc-dot{fill:#1F4FD8}.pulse{transform-box:fill-box;transform-origin:center;animation:tvpulse 2s ease-in-out infinite}
+.mc-ln{fill:none}.mc-ln.hist{stroke:#5B6472;stroke-width:1.5}.mc-ln.fc{stroke:#11834F;stroke-width:1.5;stroke-dasharray:5 3}.mc-ln.fc2{stroke:#11834F;stroke-width:.8;opacity:.6}
+.mc-now{stroke:#C8203A;stroke-width:.8;stroke-dasharray:3 3}
+.mc-pt{fill:#5B6472}.mc-pt.g{fill:#11834F}
+.mc-up{fill:#11834F;opacity:.85;animation:mcup 2.4s ease-in-out infinite}
+@keyframes mcup{0%,100%{opacity:.35}50%{opacity:.95}}
+@media (prefers-reduced-motion:reduce){.atk,.mc-up,.mc-a.fl{animation:none}}
+main.money{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:0}
+.m2-orbit{fill:none;stroke:#C9CED6;stroke-width:1;stroke-dasharray:6 4;animation:tvflow 1.4s linear infinite}
+.m2-orbit2{fill:none;stroke:#EEF0F3;stroke-width:1}
+.m2-ray{stroke-width:.8;stroke-dasharray:3 3;opacity:.55;animation:tvflow 1s linear infinite}
+.m2-pl{transform-box:fill-box;transform-origin:center;animation:m2pl 2s ease-in-out infinite}
+@keyframes m2pl{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.m2-pln{font-family:var(--f-mono);font-size:11px;font-weight:600;fill:#FFFFFF}
+.m2-n{font-family:var(--f-disp);font-weight:600;font-size:13px}
+.m2-s{font-family:var(--f-mono);font-size:7.5px;fill:#8A93A0}
+.m2-b{font-family:var(--f-mono);font-size:8px;fill:#10151F}
+.m2-core{fill:var(--bk-d,#0B2545);transition:fill .6s}
+.m2-cn{font-family:var(--f-disp);font-weight:600;font-size:15px;fill:#FFFFFF}
+.m2-cb{font-family:var(--f-mono);font-size:8.5px;fill:#DCE4F5}
+.m2-tick{stroke:#C9CED6;stroke-width:.6}
+.m2-mtn{transform-box:view-box;transform-origin:50% 85.7%;animation:m2mtn 2s ease-in-out infinite}
+@keyframes m2mtn{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.025)}}
+.m2-i1{fill:var(--bk-sl,#C9D6FA)}.m2-i0{fill:var(--bk-s,#7E9BF0);opacity:.75}.m2-f1{fill:var(--bk-pl,#F1DBA9)}.m2-f0{fill:var(--bk-p,#C98E1F)}
+.m2-i1,.m2-i0,.m2-f1,.m2-f0,.m2-il,.m2-fl,.m2-big,.m2-dot{transition:fill .6s,stroke .6s}
+.m2-il{fill:none;stroke:var(--bk-s,#1F4FD8);stroke-width:1}.m2-fl{fill:none;stroke:var(--bk-p,#A86A00);stroke-width:1}
+.m2-tag{font-family:var(--f-mono);font-size:11px;font-weight:600}.m2-tag.blue{fill:var(--bk-s,#1F4FD8)}.m2-tag.amber{fill:var(--bk-p,#A86A00)}
+.m2-close{fill:#10151F}
+.m2-cur{stroke:#10151F;stroke-width:1;transition:all .6s ease}
+.m2-dot{fill:var(--bk-p,#A86A00);transition:all .6s ease;transform-box:fill-box;transform-origin:center;animation:tvpulse 1.2s ease-in-out infinite}
+.m2-k{font-family:var(--f-mono);font-size:12px;fill:#5B6472}.m2-k.b{fill:var(--bk-d,#0B2545);font-weight:600}
+.m2-big{font-family:var(--f-disp);font-weight:700;font-size:54px;fill:var(--bk-p,#A86A00);animation:m2big 2s ease-in-out infinite}
+@keyframes m2big{0%{opacity:.25}18%,100%{opacity:1}}
+.m2-m{font-family:var(--f-mono);font-size:13px;fill:#10151F}.m2-m.blue{fill:var(--bk-s,#1F4FD8)}
+.m2-off{fill:#11834F}.m2-offt{font-family:var(--f-mono);font-size:11.5px;font-weight:600;fill:#FFFFFF}
+@media (prefers-reduced-motion:reduce){.m2-orbit,.m2-ray,.m2-pl,.m2-mtn,.m2-dot,.m2-big{animation:none}}
+main.money2{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:.4rem}
+.tabs{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.3rem;opacity:.55;margin-top:-.5rem}
+.tabs:hover{opacity:1}
+.tabs a{font-family:var(--f-mono);font-size:.68rem;color:var(--mute);text-decoration:none;padding:.15rem .5rem;border:1px solid transparent;border-radius:3px}
+.tabs a[aria-current="page"]{background:var(--panel);color:var(--ink);border-color:var(--rule)}
+.tabs a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.race{gap:.75rem;justify-content:center}
+.rc{display:grid;grid-template-columns:5rem minmax(0,1fr);align-items:center;gap:.6rem}
+.rc-c{font-family:var(--f-disp);font-weight:600;font-size:1rem}
+.rc-d{display:flex;flex-wrap:wrap;gap:.3rem;align-items:center}
+.rc-d i{font-style:normal;font-family:var(--f-mono);font-size:.74rem;padding:.2rem .5rem;border-radius:3px;background:var(--bg);border:1px solid var(--rule)}
+.rc.de .rc-c{color:var(--alert)}
+.rc.de b{font-family:var(--f-disp);font-size:2rem;line-height:1;color:var(--alert);margin-right:.4rem}
+.rc-d i.slot{border:1px dashed var(--accent);color:var(--accent);background:transparent;animation:slot 1.4s ease-in-out infinite}
+@keyframes slot{0%,100%{box-shadow:0 0 0 0 transparent}50%{box-shadow:0 0 0 .35rem color-mix(in srgb,var(--accent) 25%,transparent)}}
+.rc:not(.de) .rc-d i{animation:blink 2.4s ease-in-out infinite}
+.rc:not(.de) .rc-d i:nth-child(2){animation-delay:.3s}.rc:not(.de) .rc-d i:nth-child(3){animation-delay:.6s}.rc:not(.de) .rc-d i:nth-child(4){animation-delay:.9s}.rc:not(.de) .rc-d i:nth-child(5){animation-delay:1.2s}
+@keyframes blink{0%,100%{border-color:var(--rule)}20%{border-color:var(--ink)}}
+@media (prefers-reduced-motion:reduce){.rc-d i,.rc-d i.slot{animation:none}}
+.foot{display:flex;justify-content:space-between;gap:.4rem 1.2rem;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:.55rem;
+  font-family:var(--f-mono);font-size:.76rem;color:var(--mute)}
+.foot b{color:var(--ink);font-weight:500}
+.foot span{user-select:all}
+</style>
+</head>
+<body>
+<div class="deck">
+  <header class="top">
+    <div class="brand">AGI Labs <span>· Sovereign AI for Germany</span></div>
+  </header>
+
+  <main data-view="money2" class="money2">
+    <figure class="mc-wrap"><svg viewBox="0 0 1180 700" role="img" aria-label="Investment bank in the centre, counterparties on orbit with ten money upsides each; timeline of capital raised and fees by month"><rect x="0" y="0" width="1180" height="700" rx="10" class="mc-paper"/><circle cx="322" cy="370" r="205" class="m2-orbit"/><circle cx="322" cy="370" r="191" class="m2-orbit2"/><line x1="322.0" y1="272.0" x2="322.0" y2="189.0" class="m2-ray" style="stroke:#6B4FD8"/><circle cx="322.0" cy="165.0" r="20" class="m2-pl" style="fill:#6B4FD8;animation-delay:0.0s"/><text x="322.0" y="165.0" text-anchor="middle" dominant-baseline="middle" class="m2-pln">10</text><text x="322.0" y="38.6" text-anchor="middle" dominant-baseline="middle" class="m2-b">Yield 8–15%</text><text x="322.0" y="48.2" text-anchor="middle" dominant-baseline="middle" class="m2-b">Coupon €0.8–1.5b/y</text><text x="322.0" y="57.8" text-anchor="middle" dominant-baseline="middle" class="m2-b">IRR 20%+</text><text x="322.0" y="67.4" text-anchor="middle" dominant-baseline="middle" class="m2-b">Offtake 100%</text><text x="322.0" y="77.0" text-anchor="middle" dominant-baseline="middle" class="m2-b">Collateral 100%</text><text x="322.0" y="86.6" text-anchor="middle" dominant-baseline="middle" class="m2-b">Upside ×10</text><text x="322.0" y="96.2" text-anchor="middle" dominant-baseline="middle" class="m2-b">Exit 3–7y</text><text x="322.0" y="105.8" text-anchor="middle" dominant-baseline="middle" class="m2-b">Senior debt ✔</text><text x="322.0" y="115.4" text-anchor="middle" dominant-baseline="middle" class="m2-b">Data seat ✔</text><text x="322.0" y="125.0" text-anchor="middle" dominant-baseline="middle" class="m2-b">Usage say ✔</text><text x="322.0" y="135.0" text-anchor="middle" dominant-baseline="middle" class="m2-n" style="fill:#6B4FD8">Investors</text><line x1="398.6" y1="308.9" x2="463.5" y2="257.1" class="m2-ray" style="stroke:#3F8F2A"/><circle cx="482.3" cy="242.2" r="20" class="m2-pl" style="fill:#3F8F2A;animation-delay:0.3s"/><text x="482.3" y="242.2" text-anchor="middle" dominant-baseline="middle" class="m2-pln">10</text><text x="512.3" y="196.2" text-anchor="start" dominant-baseline="middle" class="m2-n" style="fill:#3F8F2A">NVIDIA</text><text x="512.3" y="208.2" text-anchor="start" dominant-baseline="middle" class="m2-b">Sales +€10b</text><text x="512.3" y="217.8" text-anchor="start" dominant-baseline="middle" class="m2-b">GPUs 60k</text><text x="512.3" y="227.4" text-anchor="start" dominant-baseline="middle" class="m2-b">Repeat +€3b/y</text><text x="512.3" y="237.0" text-anchor="start" dominant-baseline="middle" class="m2-b">EU share +5%</text><text x="512.3" y="246.6" text-anchor="start" dominant-baseline="middle" class="m2-b">Margin 75%</text><text x="512.3" y="256.2" text-anchor="start" dominant-baseline="middle" class="m2-b">Lock-in 5–7y</text><text x="512.3" y="265.8" text-anchor="start" dominant-baseline="middle" class="m2-b">Refresh 2y</text><text x="512.3" y="275.4" text-anchor="start" dominant-baseline="middle" class="m2-b">OEM refs 4</text><text x="512.3" y="285.0" text-anchor="start" dominant-baseline="middle" class="m2-b">Bank refs 2</text><text x="512.3" y="294.6" text-anchor="start" dominant-baseline="middle" class="m2-b">Sovereign ✔</text><line x1="417.5" y1="391.8" x2="498.5" y2="410.3" class="m2-ray" style="stroke:#C96A00"/><circle cx="521.9" cy="415.6" r="20" class="m2-pl" style="fill:#C96A00;animation-delay:0.6s"/><text x="521.9" y="415.6" text-anchor="middle" dominant-baseline="middle" class="m2-pln">10</text><text x="551.9" y="369.6" text-anchor="start" dominant-baseline="middle" class="m2-n" style="fill:#C96A00">AWS</text><text x="551.9" y="381.6" text-anchor="start" dominant-baseline="middle" class="m2-b">Revenue +€1–3b/y</text><text x="551.9" y="391.2" text-anchor="start" dominant-baseline="middle" class="m2-b">Ops 5–7y</text><text x="551.9" y="400.8" text-anchor="start" dominant-baseline="middle" class="m2-b">Racks ×1,000</text><text x="551.9" y="410.4" text-anchor="start" dominant-baseline="middle" class="m2-b">Utilization 90%+</text><text x="551.9" y="420.0" text-anchor="start" dominant-baseline="middle" class="m2-b">EU share +5%</text><text x="551.9" y="429.6" text-anchor="start" dominant-baseline="middle" class="m2-b">Margin 30%+</text><text x="551.9" y="439.2" text-anchor="start" dominant-baseline="middle" class="m2-b">Lock-in 7y</text><text x="551.9" y="448.8" text-anchor="start" dominant-baseline="middle" class="m2-b">Refs 6</text><text x="551.9" y="458.4" text-anchor="start" dominant-baseline="middle" class="m2-b">Upsell ×3</text><text x="551.9" y="468.0" text-anchor="start" dominant-baseline="middle" class="m2-b">Sovereign ✔</text><line x1="364.5" y1="458.3" x2="400.5" y2="533.1" class="m2-ray" style="stroke:#1F4FD8"/><circle cx="410.9" cy="554.7" r="20" class="m2-pl" style="fill:#1F4FD8;animation-delay:0.9s"/><text x="410.9" y="554.7" text-anchor="middle" dominant-baseline="middle" class="m2-pln">10</text><text x="440.9" y="508.7" text-anchor="start" dominant-baseline="middle" class="m2-n" style="fill:#1F4FD8">German banks</text><text x="440.9" y="519.7" text-anchor="start" dominant-baseline="middle" class="m2-s">Deutsche Bank · Commerzbank</text><text x="440.9" y="530.7" text-anchor="start" dominant-baseline="middle" class="m2-b">Margin +1%</text><text x="440.9" y="540.3" text-anchor="start" dominant-baseline="middle" class="m2-b">RoE +2–4%</text><text x="440.9" y="549.9" text-anchor="start" dominant-baseline="middle" class="m2-b">Breach −90%</text><text x="440.9" y="559.5" text-anchor="start" dominant-baseline="middle" class="m2-b">Fraud −30%</text><text x="440.9" y="569.1" text-anchor="start" dominant-baseline="middle" class="m2-b">Cost/income −5%</text><text x="440.9" y="578.7" text-anchor="start" dominant-baseline="middle" class="m2-b">DORA 100%</text><text x="440.9" y="588.3" text-anchor="start" dominant-baseline="middle" class="m2-b">Data in Germany 100%</text><text x="440.9" y="597.9" text-anchor="start" dominant-baseline="middle" class="m2-b">Agents 10,000</text><text x="440.9" y="607.5" text-anchor="start" dominant-baseline="middle" class="m2-b">Capital +€1–5b</text><text x="440.9" y="617.1" text-anchor="start" dominant-baseline="middle" class="m2-b">Share +2%</text><line x1="279.5" y1="458.3" x2="243.5" y2="533.1" class="m2-ray" style="stroke:#0E8080"/><circle cx="233.1" cy="554.7" r="20" class="m2-pl" style="fill:#0E8080;animation-delay:1.2s"/><text x="233.1" y="554.7" text-anchor="middle" dominant-baseline="middle" class="m2-pln">10</text><text x="203.1" y="508.7" text-anchor="end" dominant-baseline="middle" class="m2-n" style="fill:#0E8080">Automotive</text><text x="203.1" y="519.7" text-anchor="end" dominant-baseline="middle" class="m2-s">Porsche · Mercedes · BMW · VW</text><text x="203.1" y="530.7" text-anchor="end" dominant-baseline="middle" class="m2-b">Margin +1% 1y</text><text x="203.1" y="540.3" text-anchor="end" dominant-baseline="middle" class="m2-b">Margin +5% 5–10y</text><text x="203.1" y="549.9" text-anchor="end" dominant-baseline="middle" class="m2-b">EBIT +€2–10b/y</text><text x="203.1" y="559.5" text-anchor="end" dominant-baseline="middle" class="m2-b">Share +2–5%</text><text x="203.1" y="569.1" text-anchor="end" dominant-baseline="middle" class="m2-b">Downtime −50%</text><text x="203.1" y="578.7" text-anchor="end" dominant-baseline="middle" class="m2-b">Licences −€1b/y</text><text x="203.1" y="588.3" text-anchor="end" dominant-baseline="middle" class="m2-b">Own car brain</text><text x="203.1" y="597.9" text-anchor="end" dominant-baseline="middle" class="m2-b">Robots ×10</text><text x="203.1" y="607.5" text-anchor="end" dominant-baseline="middle" class="m2-b">Data in Germany 100%</text><text x="203.1" y="617.1" text-anchor="end" dominant-baseline="middle" class="m2-b">Breach −90%</text><line x1="226.5" y1="391.8" x2="145.5" y2="410.3" class="m2-ray" style="stroke:#C8203A"/><circle cx="122.1" cy="415.6" r="20" class="m2-pl" style="fill:#C8203A;animation-delay:1.5s"/><text x="122.1" y="415.6" text-anchor="middle" dominant-baseline="middle" class="m2-pln">10</text><text x="92.1" y="369.6" text-anchor="end" dominant-baseline="middle" class="m2-n" style="fill:#C8203A">Universities</text><text x="92.1" y="380.6" text-anchor="end" dominant-baseline="middle" class="m2-s">KIT + 10</text><text x="92.1" y="391.6" text-anchor="end" dominant-baseline="middle" class="m2-b">Grants +€10–50m</text><text x="92.1" y="401.2" text-anchor="end" dominant-baseline="middle" class="m2-b">GPUs 1–5k</text><text x="92.1" y="410.8" text-anchor="end" dominant-baseline="middle" class="m2-b">Researchers +1,000</text><text x="92.1" y="420.4" text-anchor="end" dominant-baseline="middle" class="m2-b">Spin-offs ×10</text><text x="92.1" y="430.0" text-anchor="end" dominant-baseline="middle" class="m2-b">Papers ×2</text><text x="92.1" y="439.6" text-anchor="end" dominant-baseline="middle" class="m2-b">Patents ×5</text><text x="92.1" y="449.2" text-anchor="end" dominant-baseline="middle" class="m2-b">PhD +500</text><text x="92.1" y="458.8" text-anchor="end" dominant-baseline="middle" class="m2-b">Industry €100m+</text><text x="92.1" y="468.4" text-anchor="end" dominant-baseline="middle" class="m2-b">Partners 10</text><text x="92.1" y="478.0" text-anchor="end" dominant-baseline="middle" class="m2-b">Talent stay +50%</text><line x1="245.4" y1="308.9" x2="180.5" y2="257.1" class="m2-ray" style="stroke:#10151F"/><circle cx="161.7" cy="242.2" r="20" class="m2-pl" style="fill:#10151F;animation-delay:1.8s"/><text x="161.7" y="242.2" text-anchor="middle" dominant-baseline="middle" class="m2-pln">10</text><text x="131.7" y="196.2" text-anchor="end" dominant-baseline="middle" class="m2-n" style="fill:#10151F">Germany</text><text x="131.7" y="208.2" text-anchor="end" dominant-baseline="middle" class="m2-b">GDP +0.5–1%</text><text x="131.7" y="217.8" text-anchor="end" dominant-baseline="middle" class="m2-b">Tax +€5–20b/y</text><text x="131.7" y="227.4" text-anchor="end" dominant-baseline="middle" class="m2-b">Jobs +100k</text><text x="131.7" y="237.0" text-anchor="end" dominant-baseline="middle" class="m2-b">Import AI −€10b/y</text><text x="131.7" y="246.6" text-anchor="end" dominant-baseline="middle" class="m2-b">Auto share +2–5%</text><text x="131.7" y="256.2" text-anchor="end" dominant-baseline="middle" class="m2-b">Data in Germany 100%</text><text x="131.7" y="265.8" text-anchor="end" dominant-baseline="middle" class="m2-b">Talent +10k</text><text x="131.7" y="275.4" text-anchor="end" dominant-baseline="middle" class="m2-b">Rank #1 EU</text><text x="131.7" y="285.0" text-anchor="end" dominant-baseline="middle" class="m2-b">Defence ✔</text><text x="131.7" y="294.6" text-anchor="end" dominant-baseline="middle" class="m2-b">Sovereignty ✔</text><circle cx="322" cy="370" r="96" class="m2-core"/><text x="322.0" y="300.0" text-anchor="middle" dominant-baseline="middle" class="m2-cn" id="m2Bank">Goldman Sachs</text><text x="322.0" y="320.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">Fee 3–15%</text><text x="322.0" y="331.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">Pilot €0.3–15m</text><text x="322.0" y="342.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">€1b → €30–150m</text><text x="322.0" y="353.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">€10b → €0.3–3b</text><text x="322.0" y="364.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">€100b → €3–15b</text><text x="322.0" y="375.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">IPO fee $0.5–3b</text><text x="322.0" y="386.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">Repeat deals ×10</text><text x="322.0" y="397.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">Call option ✔</text><text x="322.0" y="408.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">PE flow €10b+</text><text x="322.0" y="419.0" text-anchor="middle" dominant-baseline="middle" class="m2-cb">League #1 EU</text><line x1="720" x2="1150" y1="600.0" y2="600.0" class="mc-grid"/><text x="714.0" y="600.0" text-anchor="end" dominant-baseline="middle" class="mc-ax">€1m</text><line x1="720" x2="1150" y1="522.2" y2="522.2" class="mc-grid"/><text x="714.0" y="522.2" text-anchor="end" dominant-baseline="middle" class="mc-ax">€10m</text><line x1="720" x2="1150" y1="444.4" y2="444.4" class="mc-grid"/><text x="714.0" y="444.4" text-anchor="end" dominant-baseline="middle" class="mc-ax">€100m</text><line x1="720" x2="1150" y1="366.7" y2="366.7" class="mc-grid"/><text x="714.0" y="366.7" text-anchor="end" dominant-baseline="middle" class="mc-ax">€1b</text><line x1="720" x2="1150" y1="288.9" y2="288.9" class="mc-grid"/><text x="714.0" y="288.9" text-anchor="end" dominant-baseline="middle" class="mc-ax">€10b</text><line x1="720" x2="1150" y1="211.1" y2="211.1" class="mc-grid"/><text x="714.0" y="211.1" text-anchor="end" dominant-baseline="middle" class="mc-ax">€100b</text><line x1="720.0" x2="720.0" y1="180" y2="605" class="mc-grid"/><text x="720.0" y="616.0" text-anchor="middle" dominant-baseline="middle" class="mc-ax">2027</text><line x1="827.5" x2="827.5" y1="180" y2="605" class="mc-grid"/><text x="827.5" y="616.0" text-anchor="middle" dominant-baseline="middle" class="mc-ax">2028</text><line x1="935.0" x2="935.0" y1="180" y2="605" class="mc-grid"/><text x="935.0" y="616.0" text-anchor="middle" dominant-baseline="middle" class="mc-ax">2029</text><line x1="1042.5" x2="1042.5" y1="180" y2="605" class="mc-grid"/><text x="1042.5" y="616.0" text-anchor="middle" dominant-baseline="middle" class="mc-ax">2030</text><line x1="1150.0" x2="1150.0" y1="180" y2="605" class="mc-grid"/><text x="1150.0" y="616.0" text-anchor="middle" dominant-baseline="middle" class="mc-ax"></text><line x1="729.0" x2="729.0" y1="600" y2="603" class="m2-tick"/><line x1="737.9" x2="737.9" y1="600" y2="603" class="m2-tick"/><line x1="746.9" x2="746.9" y1="600" y2="603" class="m2-tick"/><line x1="755.8" x2="755.8" y1="600" y2="603" class="m2-tick"/><line x1="764.8" x2="764.8" y1="600" y2="603" class="m2-tick"/><line x1="773.8" x2="773.8" y1="600" y2="603" class="m2-tick"/><line x1="782.7" x2="782.7" y1="600" y2="603" class="m2-tick"/><line x1="791.7" x2="791.7" y1="600" y2="603" class="m2-tick"/><line x1="800.6" x2="800.6" y1="600" y2="603" class="m2-tick"/><line x1="809.6" x2="809.6" y1="600" y2="603" class="m2-tick"/><line x1="818.5" x2="818.5" y1="600" y2="603" class="m2-tick"/><line x1="836.5" x2="836.5" y1="600" y2="603" class="m2-tick"/><line x1="845.4" x2="845.4" y1="600" y2="603" class="m2-tick"/><line x1="854.4" x2="854.4" y1="600" y2="603" class="m2-tick"/><line x1="863.3" x2="863.3" y1="600" y2="603" class="m2-tick"/><line x1="872.3" x2="872.3" y1="600" y2="603" class="m2-tick"/><line x1="881.2" x2="881.2" y1="600" y2="603" class="m2-tick"/><line x1="890.2" x2="890.2" y1="600" y2="603" class="m2-tick"/><line x1="899.2" x2="899.2" y1="600" y2="603" class="m2-tick"/><line x1="908.1" x2="908.1" y1="600" y2="603" class="m2-tick"/><line x1="917.1" x2="917.1" y1="600" y2="603" class="m2-tick"/><line x1="926.0" x2="926.0" y1="600" y2="603" class="m2-tick"/><line x1="944.0" x2="944.0" y1="600" y2="603" class="m2-tick"/><line x1="952.9" x2="952.9" y1="600" y2="603" class="m2-tick"/><line x1="961.9" x2="961.9" y1="600" y2="603" class="m2-tick"/><line x1="970.8" x2="970.8" y1="600" y2="603" class="m2-tick"/><line x1="979.8" x2="979.8" y1="600" y2="603" class="m2-tick"/><line x1="988.8" x2="988.8" y1="600" y2="603" class="m2-tick"/><line x1="997.7" x2="997.7" y1="600" y2="603" class="m2-tick"/><line x1="1006.7" x2="1006.7" y1="600" y2="603" class="m2-tick"/><line x1="1015.6" x2="1015.6" y1="600" y2="603" class="m2-tick"/><line x1="1024.6" x2="1024.6" y1="600" y2="603" class="m2-tick"/><line x1="1033.5" x2="1033.5" y1="600" y2="603" class="m2-tick"/><line x1="1051.5" x2="1051.5" y1="600" y2="603" class="m2-tick"/><line x1="1060.4" x2="1060.4" y1="600" y2="603" class="m2-tick"/><line x1="1069.4" x2="1069.4" y1="600" y2="603" class="m2-tick"/><line x1="1078.3" x2="1078.3" y1="600" y2="603" class="m2-tick"/><line x1="1087.3" x2="1087.3" y1="600" y2="603" class="m2-tick"/><line x1="1096.2" x2="1096.2" y1="600" y2="603" class="m2-tick"/><line x1="1105.2" x2="1105.2" y1="600" y2="603" class="m2-tick"/><line x1="1114.2" x2="1114.2" y1="600" y2="603" class="m2-tick"/><line x1="1123.1" x2="1123.1" y1="600" y2="603" class="m2-tick"/><line x1="1132.1" x2="1132.1" y1="600" y2="603" class="m2-tick"/><line x1="1141.0" x2="1141.0" y1="600" y2="603" class="m2-tick"/><g class="m2-mtn"><path d="M720.0 600L720.0 600.0L721.1 598.9L722.1 595.6L723.2 590.5L724.3 583.8L725.4 575.7L726.4 566.4L727.5 556.2L728.6 545.2L729.7 533.9L730.7 522.2L731.8 510.6L732.9 499.2L734.0 488.3L735.1 478.0L736.1 468.8L737.2 460.6L738.3 453.9L739.4 448.8L740.4 445.6L741.5 444.4L741.5 444.4L744.2 443.9L746.9 442.3L749.6 439.7L752.2 436.4L754.9 432.3L757.6 427.6L760.3 422.5L763.0 417.1L765.7 411.4L768.4 405.6L771.1 399.7L773.8 394.0L776.4 388.6L779.1 383.5L781.8 378.8L784.5 374.8L787.2 371.4L789.9 368.8L792.6 367.2L795.3 366.7L795.3 366.7L798.5 366.3L801.7 365.1L804.9 363.4L808.1 361.0L811.4 358.2L814.6 354.9L817.8 351.3L821.1 347.5L824.3 343.5L827.5 339.5L830.7 335.4L833.9 331.4L837.2 327.6L840.4 324.0L843.6 320.8L846.9 318.0L850.1 315.6L853.3 313.8L856.5 312.7L859.7 312.3L859.7 312.3L863.2 312.0L866.7 311.0L870.2 309.5L873.7 307.4L877.2 305.0L880.7 302.2L884.2 299.1L887.7 295.8L891.2 292.4L894.7 288.9L898.2 285.4L901.7 282.0L905.2 278.7L908.7 275.6L912.2 272.8L915.6 270.3L919.1 268.3L922.6 266.8L926.1 265.8L929.6 265.5L929.6 265.5L932.6 265.3L935.5 264.6L938.5 263.6L941.4 262.3L944.4 260.6L947.4 258.8L950.3 256.8L953.3 254.6L956.2 252.3L959.2 250.0L962.1 247.7L965.1 245.4L968.1 243.2L971.0 241.2L974.0 239.4L976.9 237.7L979.9 236.4L982.8 235.4L985.8 234.7L988.8 234.5L988.8 234.5L996.5 234.4L1004.3 233.9L1012.1 233.1L1019.9 232.1L1027.7 230.9L1035.5 229.5L1043.3 227.9L1051.1 226.3L1058.9 224.6L1066.7 222.8L1074.5 221.1L1082.3 219.4L1090.1 217.7L1097.9 216.2L1105.7 214.8L1113.5 213.5L1121.2 212.5L1129.0 211.8L1136.8 211.3L1144.6 211.1L1144.6 600Z" class="m2-i1"/><path d="M720.0 600L720.0 600.0L721.1 599.4L722.1 597.8L723.2 595.3L724.3 591.9L725.4 587.8L726.4 583.2L727.5 578.1L728.6 572.6L729.7 566.9L730.7 561.1L731.8 555.3L732.9 549.6L734.0 544.1L735.1 539.0L736.1 534.4L737.2 530.3L738.3 526.9L739.4 524.4L740.4 522.8L741.5 522.2L741.5 522.2L744.2 521.1L746.9 517.9L749.6 512.8L752.2 506.0L754.9 497.9L757.6 488.6L760.3 478.4L763.0 467.5L765.7 456.1L768.4 444.4L771.1 432.8L773.8 421.4L776.4 410.5L779.1 400.3L781.8 391.0L784.5 382.8L787.2 376.1L789.9 371.0L792.6 367.8L795.3 366.7L795.3 366.7L798.5 366.4L801.7 365.6L804.9 364.4L808.1 362.8L811.4 360.9L814.6 358.7L817.8 356.2L821.1 353.6L824.3 350.9L827.5 348.1L830.7 345.3L833.9 342.6L837.2 340.0L840.4 337.6L843.6 335.4L846.9 333.4L850.1 331.8L853.3 330.6L856.5 329.8L859.7 329.6L859.7 329.6L863.2 329.3L866.7 328.4L870.2 327.1L873.7 325.3L877.2 323.2L880.7 320.8L884.2 318.1L887.7 315.2L891.2 312.3L894.7 309.2L898.2 306.2L901.7 303.2L905.2 300.3L908.7 297.7L912.2 295.2L915.6 293.1L919.1 291.4L922.6 290.0L926.1 289.2L929.6 288.9L929.6 288.9L932.6 288.9L935.5 288.9L938.5 288.9L941.4 288.9L944.4 288.9L947.4 288.9L950.3 288.9L953.3 288.9L956.2 288.9L959.2 288.9L962.1 288.9L965.1 288.9L968.1 288.9L971.0 288.9L974.0 288.9L976.9 288.9L979.9 288.9L982.8 288.9L985.8 288.9L988.8 288.9L988.8 288.9L996.5 288.9L1004.3 288.9L1012.1 288.9L1019.9 288.9L1027.7 288.9L1035.5 288.9L1043.3 288.9L1051.1 288.9L1058.9 288.9L1066.7 288.9L1074.5 288.9L1082.3 288.9L1090.1 288.9L1097.9 288.9L1105.7 288.9L1113.5 288.9L1121.2 288.9L1129.0 288.9L1136.8 288.9L1144.6 288.9L1144.6 600Z" class="m2-i0"/><path d="M720.0 600L720.0 600.0L721.1 600.0L722.1 600.0L723.2 600.0L724.3 600.0L725.4 600.0L726.4 600.0L727.5 600.0L728.6 600.0L729.7 597.9L730.7 586.3L731.8 574.7L732.9 563.3L734.0 552.4L735.1 542.1L736.1 532.8L737.2 524.7L738.3 518.0L739.4 512.9L740.4 509.7L741.5 508.5L741.5 508.5L744.2 508.0L746.9 506.3L749.6 503.8L752.2 500.4L754.9 496.4L757.6 491.7L760.3 486.6L763.0 481.1L765.7 475.5L768.4 469.6L771.1 463.8L773.8 458.1L776.4 452.7L779.1 447.5L781.8 442.9L784.5 438.8L787.2 435.5L789.9 432.9L792.6 431.3L795.3 430.7L795.3 430.7L798.5 430.4L801.7 429.2L804.9 427.4L808.1 425.1L811.4 422.3L814.6 419.0L817.8 415.4L821.1 411.6L824.3 407.6L827.5 403.6L830.7 399.5L833.9 395.5L837.2 391.7L840.4 388.1L843.6 384.9L846.9 382.0L850.1 379.7L853.3 377.9L856.5 376.8L859.7 376.4L859.7 376.4L863.2 376.0L866.7 375.1L870.2 373.5L873.7 371.5L877.2 369.1L880.7 366.3L884.2 363.2L887.7 359.9L891.2 356.5L894.7 353.0L898.2 349.5L901.7 346.0L905.2 342.8L908.7 339.7L912.2 336.9L915.6 334.4L919.1 332.4L922.6 330.9L926.1 329.9L929.6 329.6L929.6 329.6L932.6 329.3L935.5 328.7L938.5 327.7L941.4 326.3L944.4 324.7L947.4 322.9L950.3 320.8L953.3 318.7L956.2 316.4L959.2 314.1L962.1 311.8L965.1 309.5L968.1 307.3L971.0 305.3L974.0 303.4L976.9 301.8L979.9 300.5L982.8 299.5L985.8 298.8L988.8 298.6L988.8 298.6L996.5 298.4L1004.3 298.0L1012.1 297.2L1019.9 296.2L1027.7 294.9L1035.5 293.5L1043.3 292.0L1051.1 290.4L1058.9 288.6L1066.7 286.9L1074.5 285.1L1082.3 283.4L1090.1 281.8L1097.9 280.3L1105.7 278.9L1113.5 277.6L1121.2 276.6L1129.0 275.8L1136.8 275.4L1144.6 275.2L1144.6 600Z" class="m2-f1"/><path d="M720.0 600L720.0 600.0L721.1 600.0L722.1 600.0L723.2 600.0L724.3 600.0L725.4 600.0L726.4 600.0L727.5 600.0L728.6 600.0L729.7 600.0L730.7 600.0L731.8 600.0L732.9 600.0L734.0 600.0L735.1 600.0L736.1 600.0L737.2 600.0L738.3 600.0L739.4 600.0L740.4 600.0L741.5 600.0L741.5 600.0L744.2 600.0L746.9 600.0L749.6 600.0L752.2 600.0L754.9 600.0L757.6 600.0L760.3 596.8L763.0 585.9L765.7 574.5L768.4 562.9L771.1 551.3L773.8 539.9L776.4 528.9L779.1 518.7L781.8 509.4L784.5 501.3L787.2 494.6L789.9 489.5L792.6 486.2L795.3 485.1L795.3 485.1L798.5 484.8L801.7 484.1L804.9 482.9L808.1 481.3L811.4 479.3L814.6 477.1L817.8 474.7L821.1 472.1L824.3 469.3L827.5 466.6L830.7 463.8L833.9 461.1L837.2 458.5L840.4 456.0L843.6 453.8L846.9 451.9L850.1 450.3L853.3 449.0L856.5 448.3L859.7 448.0L859.7 448.0L863.2 447.7L866.7 446.9L870.2 445.5L873.7 443.8L877.2 441.6L880.7 439.2L884.2 436.5L887.7 433.7L891.2 430.7L894.7 427.7L898.2 424.6L901.7 421.7L905.2 418.8L908.7 416.1L912.2 413.7L915.6 411.6L919.1 409.8L922.6 408.5L926.1 407.6L929.6 407.3L929.6 407.3L932.6 407.3L935.5 407.3L938.5 407.3L941.4 407.3L944.4 407.3L947.4 407.3L950.3 407.3L953.3 407.3L956.2 407.3L959.2 407.3L962.1 407.3L965.1 407.3L968.1 407.3L971.0 407.3L974.0 407.3L976.9 407.3L979.9 407.3L982.8 407.3L985.8 407.3L988.8 407.3L988.8 407.3L996.5 407.3L1004.3 407.3L1012.1 407.3L1019.9 407.3L1027.7 407.3L1035.5 407.3L1043.3 407.3L1051.1 407.3L1058.9 407.3L1066.7 407.3L1074.5 407.3L1082.3 407.3L1090.1 407.3L1097.9 407.3L1105.7 407.3L1113.5 407.3L1121.2 407.3L1129.0 407.3L1136.8 407.3L1144.6 407.3L1144.6 600Z" class="m2-f0"/></g><path d="M720.0 600.0L721.1 598.9L722.1 595.6L723.2 590.5L724.3 583.8L725.4 575.7L726.4 566.4L727.5 556.2L728.6 545.2L729.7 533.9L730.7 522.2L731.8 510.6L732.9 499.2L734.0 488.3L735.1 478.0L736.1 468.8L737.2 460.6L738.3 453.9L739.4 448.8L740.4 445.6L741.5 444.4L741.5 444.4L744.2 443.9L746.9 442.3L749.6 439.7L752.2 436.4L754.9 432.3L757.6 427.6L760.3 422.5L763.0 417.1L765.7 411.4L768.4 405.6L771.1 399.7L773.8 394.0L776.4 388.6L779.1 383.5L781.8 378.8L784.5 374.8L787.2 371.4L789.9 368.8L792.6 367.2L795.3 366.7L795.3 366.7L798.5 366.3L801.7 365.1L804.9 363.4L808.1 361.0L811.4 358.2L814.6 354.9L817.8 351.3L821.1 347.5L824.3 343.5L827.5 339.5L830.7 335.4L833.9 331.4L837.2 327.6L840.4 324.0L843.6 320.8L846.9 318.0L850.1 315.6L853.3 313.8L856.5 312.7L859.7 312.3L859.7 312.3L863.2 312.0L866.7 311.0L870.2 309.5L873.7 307.4L877.2 305.0L880.7 302.2L884.2 299.1L887.7 295.8L891.2 292.4L894.7 288.9L898.2 285.4L901.7 282.0L905.2 278.7L908.7 275.6L912.2 272.8L915.6 270.3L919.1 268.3L922.6 266.8L926.1 265.8L929.6 265.5L929.6 265.5L932.6 265.3L935.5 264.6L938.5 263.6L941.4 262.3L944.4 260.6L947.4 258.8L950.3 256.8L953.3 254.6L956.2 252.3L959.2 250.0L962.1 247.7L965.1 245.4L968.1 243.2L971.0 241.2L974.0 239.4L976.9 237.7L979.9 236.4L982.8 235.4L985.8 234.7L988.8 234.5L988.8 234.5L996.5 234.4L1004.3 233.9L1012.1 233.1L1019.9 232.1L1027.7 230.9L1035.5 229.5L1043.3 227.9L1051.1 226.3L1058.9 224.6L1066.7 222.8L1074.5 221.1L1082.3 219.4L1090.1 217.7L1097.9 216.2L1105.7 214.8L1113.5 213.5L1121.2 212.5L1129.0 211.8L1136.8 211.3L1144.6 211.1" class="m2-il"/><path d="M720.0 600.0L721.1 600.0L722.1 600.0L723.2 600.0L724.3 600.0L725.4 600.0L726.4 600.0L727.5 600.0L728.6 600.0L729.7 597.9L730.7 586.3L731.8 574.7L732.9 563.3L734.0 552.4L735.1 542.1L736.1 532.8L737.2 524.7L738.3 518.0L739.4 512.9L740.4 509.7L741.5 508.5L741.5 508.5L744.2 508.0L746.9 506.3L749.6 503.8L752.2 500.4L754.9 496.4L757.6 491.7L760.3 486.6L763.0 481.1L765.7 475.5L768.4 469.6L771.1 463.8L773.8 458.1L776.4 452.7L779.1 447.5L781.8 442.9L784.5 438.8L787.2 435.5L789.9 432.9L792.6 431.3L795.3 430.7L795.3 430.7L798.5 430.4L801.7 429.2L804.9 427.4L808.1 425.1L811.4 422.3L814.6 419.0L817.8 415.4L821.1 411.6L824.3 407.6L827.5 403.6L830.7 399.5L833.9 395.5L837.2 391.7L840.4 388.1L843.6 384.9L846.9 382.0L850.1 379.7L853.3 377.9L856.5 376.8L859.7 376.4L859.7 376.4L863.2 376.0L866.7 375.1L870.2 373.5L873.7 371.5L877.2 369.1L880.7 366.3L884.2 363.2L887.7 359.9L891.2 356.5L894.7 353.0L898.2 349.5L901.7 346.0L905.2 342.8L908.7 339.7L912.2 336.9L915.6 334.4L919.1 332.4L922.6 330.9L926.1 329.9L929.6 329.6L929.6 329.6L932.6 329.3L935.5 328.7L938.5 327.7L941.4 326.3L944.4 324.7L947.4 322.9L950.3 320.8L953.3 318.7L956.2 316.4L959.2 314.1L962.1 311.8L965.1 309.5L968.1 307.3L971.0 305.3L974.0 303.4L976.9 301.8L979.9 300.5L982.8 299.5L985.8 298.8L988.8 298.6L988.8 298.6L996.5 298.4L1004.3 298.0L1012.1 297.2L1019.9 296.2L1027.7 294.9L1035.5 293.5L1043.3 292.0L1051.1 290.4L1058.9 288.6L1066.7 286.9L1074.5 285.1L1082.3 283.4L1090.1 281.8L1097.9 280.3L1105.7 278.9L1113.5 277.6L1121.2 276.6L1129.0 275.8L1136.8 275.4L1144.6 275.2" class="m2-fl"/><text x="1139.3" y="201.1" text-anchor="end" dominant-baseline="middle" class="m2-tag blue">i</text><text x="1139.3" y="265.2" text-anchor="end" dominant-baseline="middle" class="m2-tag amber">fee</text><circle cx="741.5" cy="600" r="3.5" class="m2-close"/><circle cx="795.3" cy="600" r="3.5" class="m2-close"/><circle cx="859.7" cy="600" r="3.5" class="m2-close"/><circle cx="929.6" cy="600" r="3.5" class="m2-close"/><circle cx="988.8" cy="600" r="3.5" class="m2-close"/><circle cx="1144.6" cy="600" r="3.5" class="m2-close"/><line id="m2Cur" x1="741.5" x2="741.5" y1="170" y2="600" class="m2-cur"/><circle id="m2Dot" cx="741.5" cy="600" r="7" class="m2-dot"/><text x="720.0" y="58.0" text-anchor="start" dominant-baseline="middle" class="m2-k">fee to</text><text x="772.0" y="58.0" text-anchor="start" dominant-baseline="middle" class="m2-k b" id="m2Bank2">Goldman Sachs</text><text x="720" y="108" class="m2-big" id="m2Big">€0.3–15m</text><text x="720.0" y="138.0" text-anchor="start" dominant-baseline="middle" class="m2-m" id="m2Mon">Mar 2027</text><text x="820.0" y="138.0" text-anchor="start" dominant-baseline="middle" class="m2-m blue" id="m2Inv">i €10–100m</text><rect x="1000" y="40" width="150" height="26" rx="13" class="m2-off"/><text x="1075.0" y="53.0" text-anchor="middle" dominant-baseline="middle" class="m2-offt">100% offtake ✔</text></svg></figure>
+    <div class="cd-rot" id="m2Ctl" role="group" aria-label="Investment bank in the centre"><div class="cd-row"><span>Centre:</span></div></div>
+  </main>
+
+  <footer class="cta" data-view="money2">
+    <div class="cta-msg"><b>Money on the road. Mandate the first €10–100m this quarter.</b><span>Simon Zab, CEO at AGI Labs</span></div>
+    <div class="cta-contact"><span>CEO@AGI-Labs.de</span></div>
+  </footer>
+</div>
+<script>
+(function(){var big=document.getElementById('m2Big');if(!big)return;
+var C=[[741.5, "Mar 2027", "\u20ac0.3\u201315m", "\u20ac10\u2013100m"], [795.3, "Sep 2027", "\u20ac30\u2013150m", "\u20ac1b"], [859.7, "Apr 2028", "\u20ac90\u2013750m", "\u20ac3\u20135b"], [929.6, "Dec 2028", "\u20ac0.3\u20133b", "\u20ac10\u201320b"], [988.8, "Jul 2029", "\u20ac0.3\u20137.5b", "\u20ac10\u201350b"], [1144.6, "Dec 2030", "\u20ac0.3\u201315b", "\u20ac10\u2013100b"]],k=0,cur=document.getElementById('m2Cur'),dot=document.getElementById('m2Dot'),mon=document.getElementById('m2Mon'),inv=document.getElementById('m2Inv');
+function step(){var c=C[k];cur.setAttribute('x1',c[0]);cur.setAttribute('x2',c[0]);dot.setAttribute('cx',c[0]);big.textContent=c[2];mon.textContent=c[1];inv.textContent='i '+c[3];k=(k+1)%C.length}
+step();if(!matchMedia('(prefers-reduced-motion: reduce)').matches)setInterval(step,2000);
+var row=document.querySelector('#m2Ctl .cd-row'),fig=big.ownerSVGElement,B=[],N=[
+['Goldman Sachs',{d:'#22344F',p:'#6B96C3',pl:'#CFDDED',s:'#22344F',sl:'#DDE3EC'}],
+['JPMorgan',{d:'#3B2A20',p:'#9C7A4B',pl:'#EADFCB',s:'#3B2A20',sl:'#E2DBD5'}],
+['Morgan Stanley',{d:'#002B51',p:'#187ABA',pl:'#CDE3F2',s:'#002B51',sl:'#D5DEE8'}],
+['Citi',{d:'#003B70',p:'#EE1C25',pl:'#F9C9CB',s:'#056DAE',sl:'#CFE3F2'}],
+['Bank of America',{d:'#012169',p:'#E31837',pl:'#F7C6CE',s:'#012169',sl:'#D3D9E8'}]];
+function pick(i){var n=N[i][0],c=N[i][1];document.getElementById('m2Bank').textContent=n;document.getElementById('m2Bank2').textContent=n;for(var k in c)fig.style.setProperty('--bk-'+k,c[k]);B.forEach(function(x,j){x.setAttribute('aria-pressed',j===i?'true':'false')})}
+N.forEach(function(n,i){var b=document.createElement('button');b.type='button';b.textContent=n[0];b.addEventListener('click',function(){pick(i)});row.appendChild(b);B.push(b)});pick(3);})();
+</script>
+</body>
+</html>
